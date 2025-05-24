@@ -48,7 +48,7 @@ function TrustIndicators() {
   }, [isPowered]);
 
   return (
-    <section className="py-5 bg-gradient-to-br from-gray-900 to-gray-800">
+    <section className="py-34 bg-gradient-to-br from-gray-900 to-gray-800">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* TV Container */}
         <motion.div 
