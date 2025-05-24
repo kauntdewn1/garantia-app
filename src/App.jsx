@@ -8,6 +8,7 @@ import Bullets from './components/Bullets'
 import Features from './components/Features'
 import Countdown from './components/Countdown'
 import LeadMagnet from './components/LeadMagnet'
+import TrustIndicators from './components/TrustIndicators'
 import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
@@ -29,6 +30,7 @@ function App() {
               <Features />
               <Countdown />
               <LeadMagnet />
+              <TrustIndicators />
             </main>
           } />
         </Routes>
