@@ -70,7 +70,7 @@ function TrustIndicators() {
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(transparent 80%, rgba(0, 0, 0, 0.1) 80%)',
+              background: 'linear-gradient(transparent 20%, rgba(0, 0, 0, 0.1) 20%)',
               backgroundSize: '100% 10px',
               animation: 'flicker 1.70s infinite'
             }}
