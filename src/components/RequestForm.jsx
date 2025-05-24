@@ -74,6 +74,22 @@ function RequestForm() {
                 <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5 mr-2" />
                 Acessar agora
               </button>
+              
+              {/* Miniaturized benefits */}
+              <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">🕐</span>
+                  <span>Resposta em até 24h</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">🔒</span>
+                  <span>Garantia aprovada pela SUSEP</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">📄</span>
+                  <span>Zero burocracia</span>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -211,6 +227,22 @@ function RequestForm() {
                 >
                   Enviar Solicitação
                 </button>
+                
+                {/* Miniaturized benefits */}
+                <div className="mt-4 grid grid-cols-3 gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🕐</span>
+                    <span>Resposta em até 24h</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🔒</span>
+                    <span>Garantia aprovada pela SUSEP</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">📄</span>
+                    <span>Zero burocracia</span>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
