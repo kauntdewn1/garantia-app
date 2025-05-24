@@ -21,7 +21,7 @@ function RequestForm() {
   };
 
   return (
-    <section id="form" className="py-12 bg-gray-50">
+    <section id="form" className="py-24 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="bg-white shadow-xl rounded-lg overflow-hidden"
@@ -138,7 +138,7 @@ function RequestForm() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full btn-primary"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
                   Enviar Solicitação
                 </button>
