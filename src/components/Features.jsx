@@ -39,6 +39,11 @@ const partners = [
 ];
 
 function Features() {
+  const handleImageError = (e, partner) => {
+    console.error(`Error loading image for ${partner.name}:`, e);
+    console.log('Image URL:', e.target.src);
+  };
+
   return (
     <section id="features" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,6 +105,8 @@ function Features() {
                   src={partner.image}
                   alt={partner.name}
                   className="h-16 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  onError={(e) => handleImageError(e, partner)}
+                  onLoad={() => console.log(`Image loaded successfully: ${partner.name}`)}
                 />
               </motion.div>
             ))}
