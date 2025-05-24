@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -8,22 +9,30 @@ import Countdown from './components/Countdown'
 import LeadMagnet from './components/LeadMagnet'
 import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
+import PrivacyPolicy from './components/PrivacyPolicy'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <main>
-        <Hero />
-        <Bullets />
-        <Features />
-        <Countdown />
-        <LeadMagnet />
-        <RequestForm />
-      </main>
-      <Footer />
-    </div>
-  )
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <Routes>
+          <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+          <Route path="/" element={
+            <main>
+              <Hero />
+              <Bullets />
+              <Features />
+              <Countdown />
+              <LeadMagnet />
+              <RequestForm />
+            </main>
+          } />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
