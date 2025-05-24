@@ -14,8 +14,8 @@ function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="block">Seguro Garantia para</span>
-              <span className="block text-blue-200">Licitações em 24h</span>
+              <span className="block">Sem Seguro? </span>
+              <span className="block text-blue-200">Sem Licitação.</span>
             </motion.h1>
             <motion.p 
               className="mt-6 text-xl text-gray-100 max-w-3xl"
