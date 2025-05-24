@@ -28,10 +28,10 @@ function Features() {
             Benefícios
           </h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Por que escolher a MG Riscos?
+            Porque dezenas de empresas estão migrando para a MG Licitações – e vencendo licitações com apólices emitidas rapidamente.
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Oferecemos soluções completas em seguro garantia para sua empresa participar de licitações com tranquilidade.
+            Aceleramos sua participação em editais com seguro garantia digital, aprovado em horas e aceito em todo o Brasil. Simples e rápido.
           </p>
         </div>
 
