@@ -9,11 +9,11 @@ function Bullets() {
     },
     {
       icon: '🔐',
-      text: 'Conformidade 100% Legal – \nApólice ajustada à Lei 14.133/21.'
+      text: 'Conformidade 100% Legal – \n Apólice ajustada à Lei 14.133/21.'
     },
     {
       icon: '🛡️',
-      text: 'Especialistas em Licitações Públicas – \n+15 anos protegendo contratos milionários.'
+      text: 'Especialistas em Licitações Públicas – \n +15 anos protegendo contratos milionários.'
     }
   ];
 
