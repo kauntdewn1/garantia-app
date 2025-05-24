@@ -4,17 +4,17 @@ import { motion } from 'framer-motion';
 const features = [
   {
     title: 'Rápido e Eficiente',
-    description: 'Emissão de apólice em até 24 horas após aprovação.',
+    description: 'Apólices emitidas em até 24h, Não perca mais editais por burocracia ou seguradoras lentas.',
     icon: '⚡'
   },
   {
     title: 'Totalmente Digital',
-    description: 'Processo 100% online, sem necessidade de documentos físicos.',
+    description: 'Sem papel, sem enrolação. Contratação 100% online, direto do seu celular ou desktop.',
     icon: '💻'
   },
   {
     title: 'Segurança Garantida',
-    description: 'Seguradoras de primeira linha, reguladas pela SUSEP.',
+    description: 'Proteção aprovada pela SUSEP. Trabalhamos apenas com seguradoras líderes no setor público.',
     icon: '🛡️'
   }
 ];
