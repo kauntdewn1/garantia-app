@@ -83,7 +83,7 @@ function Features() {
 
         {/* Partners Section */}
         <div className="mt-24">
-          <h3 className="text-center text-2xl font-semibold text-gray-900 mb-12">
+          <h3 className="text-center text-2xl font-semibold text-gray-200 mb-12">
             Parceiros e Certificações
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
