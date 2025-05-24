@@ -41,10 +41,10 @@ function Countdown() {
   }, []);
 
   return (
-    <section className="py-8 bg-gradient-to-r from-primary to-secondary">
+    <section className="py-16 bg-[#1a2550]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="backdrop-blur-sm bg-white/10 rounded-2xl p-8 border border-white/20"
+          className="backdrop-blur-sm bg-black/30 rounded-2xl p-8 border border-white/10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -56,19 +56,19 @@ function Countdown() {
             </h2>
             
             <div className="flex justify-center gap-4 mb-6">
-              <div className="bg-white/20 rounded-lg p-4 min-w-[100px]">
+              <div className="bg-black/30 rounded-lg p-4 min-w-[100px]">
                 <div className="text-4xl font-bold text-white">{timeLeft.days}</div>
                 <div className="text-sm text-white/80">Dias</div>
               </div>
-              <div className="bg-white/20 rounded-lg p-4 min-w-[100px]">
+              <div className="bg-black/30 rounded-lg p-4 min-w-[100px]">
                 <div className="text-4xl font-bold text-white">{timeLeft.hours}</div>
                 <div className="text-sm text-white/80">Horas</div>
               </div>
-              <div className="bg-white/20 rounded-lg p-4 min-w-[100px]">
+              <div className="bg-black/30 rounded-lg p-4 min-w-[100px]">
                 <div className="text-4xl font-bold text-white">{timeLeft.minutes}</div>
                 <div className="text-sm text-white/80">Minutos</div>
               </div>
-              <div className="bg-white/20 rounded-lg p-4 min-w-[100px]">
+              <div className="bg-black/30 rounded-lg p-4 min-w-[100px]">
                 <div className="text-4xl font-bold text-white">{timeLeft.seconds}</div>
                 <div className="text-sm text-white/80">Segundos</div>
               </div>

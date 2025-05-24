@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Countdown from './components/Countdown'
 import Bullets from './components/Bullets'
 import Features from './components/Features'
+import Countdown from './components/Countdown'
 import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
 
@@ -14,9 +14,9 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Countdown />
         <Bullets />
         <Features />
+        <Countdown />
         <RequestForm />
       </main>
       <Footer />
