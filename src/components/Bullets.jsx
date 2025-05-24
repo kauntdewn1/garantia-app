@@ -5,15 +5,15 @@ function Bullets() {
   const bullets = [
     {
       icon: '⚡',
-      text: 'Aprovação em até 24h – \n Seguro entregue no seu e-mail, pronto para licitar.'
+      text: ['Aprovação em até 24h', 'Seguro entregue no seu e-mail, pronto para licitar.']
     },
     {
       icon: '🔐',
-      text: 'Conformidade 100% Legal – \n Apólice ajustada à Lei 14.133/21.'
+      text: ['Conformidade 100% Legal', 'Apólice ajustada à Lei 14.133/21.']
     },
     {
       icon: '🛡️',
-      text: 'Especialistas em Licitações Públicas – \n +15 anos protegendo contratos milionários.'
+      text: ['Especialistas em Licitações Públicas', '+15 anos protegendo contratos milionários.']
     }
   ];
 
@@ -32,7 +32,10 @@ function Bullets() {
                 transition={{ delay: index * 0.2, duration: 0.5 }}
               >
                 <span className="text-3xl">{bullet.icon}</span>
-                <p className="text-white text-lg font-medium">{bullet.text}</p>
+                <div className="text-white">
+                  <p className="text-lg font-bold">{bullet.text[0]}</p>
+                  <p className="text-sm mt-1 opacity-90">{bullet.text[1]}</p>
+                </div>
               </motion.div>
             ))}
           </div>
