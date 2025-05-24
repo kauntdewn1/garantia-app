@@ -24,7 +24,7 @@ function Hero() {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               Receba sua Apólice em menos de 12h e pare de perder contratos públicos por burocracia. 
-              <br/> Não seja engolido pela nova Lei 14.133/21.
+              
             </motion.p>
             <motion.div 
               className="mt-10 flex gap-4"
@@ -52,6 +52,7 @@ function Hero() {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               Empresas estão ficando de fora de milhões em licitações por falta de conformidade. Nossa solução resolve isso em horas – com respaldo jurídico, emissão rápida e garantia aprovada pelos maiores órgãos públicos do país.
+              <br/> Não seja engolido pela nova Lei 14.133/21.
             </motion.p>
           </div>
         </div>
