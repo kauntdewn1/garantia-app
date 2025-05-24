@@ -28,7 +28,7 @@ function Features() {
             Benefícios
           </h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Porque dezenas de empresas estão migrando para a MG Licitações – e vencendo licitações com apólices emitidas rapidamente.
+            Porque dezenas de empresas estão migrando para aGestão de Riscos e Corretora de Seguros – e vencendo licitações com apólices emitidas rapidamente.
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
             Aceleramos sua participação em editais com seguro garantia digital, aprovado em horas e aceito em todo o Brasil. Simples e rápido.
