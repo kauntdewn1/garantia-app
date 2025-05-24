@@ -67,7 +67,7 @@ function TrustIndicators() {
         <motion.div
           className={`relative rounded-2xl overflow-hidden ${isGlitching ? 'animate-glitch' : ''}`}
           style={{
-            background: 'linear-gradient(to bottom, #000 0%, #111 100%)',
+            background: 'linear-gradient(to bottom, #0000 0%, #111 100%)',
             boxShadow: '0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 40px rgba(0, 255, 255, 0.1)',
             border: '8px solid #333',
             transform: 'perspective(1000px) rotateX(2deg)'
