@@ -10,7 +10,6 @@ import { getStorage } from 'firebase/storage';
 
 // Configuração do Firebase
 const firebaseConfig = {
-  // Substitua com suas credenciais do Firebase
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "SUA_API_KEY",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "seu-projeto.firebaseapp.com",
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "seu-projeto",
