@@ -11,12 +11,12 @@ import { getStorage } from 'firebase/storage';
 // Configuração do Firebase
 const firebaseConfig = {
   // Substitua com suas credenciais do Firebase
-  apiKey: process.env.FIREBASE_API_KEY || "SUA_API_KEY",
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN || "seu-projeto.firebaseapp.com",
-  projectId: process.env.FIREBASE_PROJECT_ID || "seu-projeto",
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "seu-projeto.appspot.com",
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "seu-messaging-sender-id",
-  appId: process.env.FIREBASE_APP_ID || "seu-app-id"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "SUA_API_KEY",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "seu-projeto.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "seu-projeto",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "seu-projeto.appspot.com",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "seu-messaging-sender-id",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "seu-app-id"
 };
 
 // Inicializar Firebase
