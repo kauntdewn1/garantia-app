@@ -105,15 +105,15 @@ function TrustIndicators() {
             </AnimatePresence>
           </div>
 
-          {/* Power Button - Now on the right side */}
+          {/* Power Button - Now positioned lower on the right side */}
           <motion.button
             onClick={() => setIsPowered(!isPowered)}
-            className="absolute right-1 top-1/2 transform -translate-y-1/2"
-            whileHover={{ scale: 0.1 }}
-            whileTap={{ scale: 0.10 }}
+            className="absolute right-4 bottom-4"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <div className="w-6 h-6 rounded-full bg-red-600 shadow-lg flex items-center justify-down border-4 border-gray-800">
-              <div className="w-3 h-3 rounded-full bg-red-800"></div>
+            <div className="w-8 h-8 rounded-full bg-red-600 shadow-glow flex items-center justify-center border-4 border-gray-800">
+              <div className="w-4 h-4 rounded-full bg-red-800"></div>
             </div>
           </motion.button>
         </motion.div>
