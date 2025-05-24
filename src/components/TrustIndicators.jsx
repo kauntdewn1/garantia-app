@@ -109,8 +109,8 @@ function TrustIndicators() {
           <motion.button
             onClick={() => setIsPowered(!isPowered)}
             className="absolute right-4 bottom-4"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 0.1 }}
+            whileTap={{ scale: 0.3 }}
           >
             <div className="w-8 h-8 rounded-full bg-red-600 shadow-glow flex items-center justify-center border-4 border-gray-800">
               <div className="w-4 h-4 rounded-full bg-red-800"></div>
