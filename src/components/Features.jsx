@@ -22,19 +22,19 @@ const features = [
 const partners = [
   {
     name: 'FENACOR',
-    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/fenacor.png?alt=media'
+    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/fenacor.png'
   },
   {
     name: 'Grupo A2',
-    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/grupoa2.png?alt=media'
+    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/grupoa2.png'
   },
   {
     name: 'IBRACOR',
-    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/ibracor.png?alt=media'
+    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/ibracor.png'
   },
   {
     name: 'SUSEP',
-    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/susep.png?alt=media'
+    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/susep.png'
   }
 ];
 
