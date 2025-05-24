@@ -40,9 +40,12 @@ const partners = [
 
 function Features() {
   const handleImageError = (e, partner) => {
-    console.error(`Error loading image for ${partner.name}:`, e);
-    // Provide a fallback image or hide the image on error
-    e.target.style.display = 'none';
+    // Instead of hiding the image, show the partner name as text
+    const container = e.target.parentElement;
+    const textElement = document.createElement('span');
+    textElement.className = 'text-gray-400 text-lg font-semibold';
+    textElement.textContent = partner.name;
+    e.target.replaceWith(textElement);
   };
 
   return (
