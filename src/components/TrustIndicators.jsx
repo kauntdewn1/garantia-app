@@ -68,9 +68,9 @@ function TrustIndicators() {
           
           {/* Screen flicker effect */}
           <div 
-            className="absolute inset-2 pointer-events-none"
+            className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(transparent 20%, rgba(0, 0, 0, 0.1) 20%)',
+              background: 'linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 5%)',
               backgroundSize: '100% 10px',
               animation: 'flicker 1.70s infinite'
             }}
