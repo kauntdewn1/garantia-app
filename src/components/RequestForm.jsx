@@ -61,7 +61,7 @@ function RequestForm() {
             transition={{ duration: 0.5 }}
           >
             <div className="px-6 py-8 text-center">
-              <h1 className="text-2xl font-bold text-gray-900 mb-8">
+              <h1 className="text-2xl font-bold text-gray-900 mb-3">
                 Sua próxima licitação começa aqui.
               </h1>
               <p className="text-2xl font-thin text-gray-900 mb-8">
