@@ -49,7 +49,7 @@ function TrustIndicators() {
 
   return (
     <section className="py-4 bg-gradient-to-br from-gray-900 to-gray-800">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-2xl mx-auto px-8 sm:px-6 lg:px-8">
         {/* TV Container */}
         <motion.div 
           className={`relative rounded-2xl overflow-hidden ${isGlitching ? 'animate-glitch' : ''}`}
