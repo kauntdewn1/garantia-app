@@ -11,6 +11,7 @@ import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
+import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           } />
         </Routes>
         <Footer />
+        <WhatsAppButton />
       </div>
     </Router>
   );
