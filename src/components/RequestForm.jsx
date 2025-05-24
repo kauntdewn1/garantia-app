@@ -62,7 +62,7 @@ function RequestForm() {
           >
             <div className="px-6 py-8 text-center">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                Faça já sua cotação
+                Sua próxima licitação começa aqui.
               </h2>
               <button
                 onClick={handleGoogleSignIn}
