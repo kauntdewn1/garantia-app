@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import Bullets from './components/Bullets'
 import Features from './components/Features'
 import Countdown from './components/Countdown'
+import LeadMagnet from './components/LeadMagnet'
 import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
 
@@ -17,6 +18,7 @@ function App() {
         <Bullets />
         <Features />
         <Countdown />
+        <LeadMagnet />
         <RequestForm />
       </main>
       <Footer />
