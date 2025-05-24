@@ -20,6 +20,8 @@ function RequestForm() {
     // Form submission logic will be implemented here
   };
 
+  const inputClasses = "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-gray-150";
+
   return (
     <section id="form" className="py-24 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,7 +51,7 @@ function RequestForm() {
                       type="text"
                       id="edital"
                       name="edital"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                      className={inputClasses}
                       required
                     />
                   </div>
@@ -82,7 +84,7 @@ function RequestForm() {
                       type="text"
                       id="empresa_tomador"
                       name="empresa_tomador"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                      className={inputClasses}
                       required
                     />
                   </div>
@@ -94,7 +96,7 @@ function RequestForm() {
                       type="text"
                       id="cnpj_tomador"
                       name="cnpj_tomador"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                      className={inputClasses}
                       placeholder="00.000.000/0000-00"
                       required
                     />
@@ -115,7 +117,7 @@ function RequestForm() {
                       type="text"
                       id="empresa_assegurado"
                       name="empresa_assegurado"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                      className={inputClasses}
                       required
                     />
                   </div>
@@ -127,7 +129,7 @@ function RequestForm() {
                       type="text"
                       id="cnpj_assegurado"
                       name="cnpj_assegurado"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                      className={inputClasses}
                       placeholder="00.000.000/0000-00"
                       required
                     />
