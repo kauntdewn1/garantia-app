@@ -30,7 +30,7 @@ function TrustIndicators() {
     
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % indicators.length);
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [isPowered]);
