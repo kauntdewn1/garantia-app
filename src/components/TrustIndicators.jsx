@@ -8,17 +8,17 @@ function TrustIndicators() {
 
   const indicators = [
     {
-      icon: '✅',
+      icon: '✚',
       title: 'Seguro pela Lei 14.133/21',
       description: 'Em total conformidade com a legislação'
     },
     {
-      icon: '📊',
+      icon: '✜',
       title: '+1.400 apólices emitidas',
       description: 'Empresas confiam em nossa solução'
     },
     {
-      icon: '🔐',
+      icon: '✚',
       title: 'Seus dados estão protegidos',
       description: 'Em conformidade com a LGPD'
     }
