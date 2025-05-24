@@ -18,7 +18,7 @@ function Header() {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <img
-              src="/assets/lg_hrz_transp1.png"
+              src="/assets/lg_hrz_transp.png"
               alt="MG Riscos Logo"
               className="h-12"
             />
