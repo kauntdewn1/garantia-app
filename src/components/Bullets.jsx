@@ -5,15 +5,15 @@ function Bullets() {
   const bullets = [
     {
       icon: '⚡',
-      text: 'Aprovação em até 24h – </br> Seguro entregue no seu e-mail, pronto para licitar.'
+      text: 'Aprovação em até 24h – \n Seguro entregue no seu e-mail, pronto para licitar.'
     },
     {
       icon: '🔐',
-      text: 'Conformidade 100% Legal – Apólice ajustada à Lei 14.133/21.'
+      text: 'Conformidade 100% Legal – \nApólice ajustada à Lei 14.133/21.'
     },
     {
       icon: '🛡️',
-      text: 'Especialistas em Licitações Públicas – +15 anos protegendo contratos milionários.'
+      text: 'Especialistas em Licitações Públicas – \n+15 anos protegendo contratos milionários.'
     }
   ];
 
