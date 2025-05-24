@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Countdown from './components/Countdown'
 import Bullets from './components/Bullets'
 import Features from './components/Features'
 import RequestForm from './components/RequestForm'
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <Countdown />
         <Bullets />
         <Features />
         <RequestForm />
