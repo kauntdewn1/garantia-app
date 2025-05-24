@@ -22,19 +22,19 @@ const features = [
 const partners = [
   {
     name: 'FENACOR',
-    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/fenacor.png`
+    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/fenacor.png?alt=media&token=85e04073-5b81-481e-950e-0c07e2e48a25`
   },
   {
     name: 'Grupo A2',
-    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/grupoa2.png`
+    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/grupoa2.png?alt=media&token=efcfd161-2bd3-4407-837b-d4dbe7065859`
   },
   {
     name: 'IBRACOR',
-    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/ibracor.png`
+    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/ibracor.png?alt=media&token=f5656961-b567-4415-8d9e-1d8cd2938869`
   },
   {
     name: 'SUSEP',
-    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/susep.png`
+    image: `${import.meta.env.VITE_FIREBASE_STORAGE_BUCKET}/susep.png?alt=media&token=21704588-30fc-4d0d-adcd-8ece7f19e2b6`
   }
 ];
 
