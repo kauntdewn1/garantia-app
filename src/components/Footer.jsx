@@ -23,6 +23,12 @@ function Footer() {
             >
               Política de Privacidade
             </Link>
+            <Link
+              to="/termos-de-servico"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Termos de Serviço
+            </Link>
             <a
               href="mailto:licitacoes@mgriscos.com"
               className="text-gray-400 hover:text-white transition-colors"

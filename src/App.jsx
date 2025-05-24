@@ -10,6 +10,7 @@ import LeadMagnet from './components/LeadMagnet'
 import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
+import TermsOfService from './components/TermsOfService'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+          <Route path="/termos-de-servico" element={<TermsOfService />} />
           <Route path="/" element={
             <main>
               <Hero />
