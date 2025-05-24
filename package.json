@@ -7,7 +7,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "start": "serve public"
+    "start": "serve public",
+    "dev": "npm run start"
   },
   "dependencies": {
     "firebase": "^11.8.1"
