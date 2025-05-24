@@ -108,7 +108,7 @@ function TrustIndicators() {
           {/* Power Button - Now on the right side */}
           <motion.button
             onClick={() => setIsPowered(!isPowered)}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            className="absolute right-1 top-1/2 transform -translate-y-1/2"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
