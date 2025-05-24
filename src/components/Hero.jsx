@@ -45,6 +45,14 @@ function Hero() {
                 Saiba Mais
               </a>
             </motion.div>
+            <motion.p 
+              className="mt-6 text-xl text-gray-100 max-w-3xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              Empresas estão ficando de fora de milhões em licitações por falta de conformidade. Nossa solução resolve isso em horas – com respaldo jurídico, emissão rápida e garantia aprovada pelos maiores órgãos públicos do país.
+            </motion.p>
           </div>
         </div>
       </div>
