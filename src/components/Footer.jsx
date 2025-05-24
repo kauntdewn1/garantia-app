@@ -1,0 +1,33 @@
+import React from 'react';
+
+function Footer() {
+  return (
+    <footer className="bg-gray-800">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          <div>
+            <img
+              src="/assets/lg_hrz_transp.png"
+              alt="MG Riscos Logo"
+              className="h-10 brightness-0 invert"
+            />
+            <p className="mt-4 text-gray-400 text-sm">
+              © {new Date().getFullYear()} MG Riscos. Todos os direitos reservados.
+            </p>
+          </div>
+          <div className="text-right">
+            <h3 className="text-white font-semibold">Contato</h3>
+            <a
+              href="mailto:licitacoes@mgriscos.com"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              licitacoes@mgriscos.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;
