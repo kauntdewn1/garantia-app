@@ -5,6 +5,7 @@ function TrustIndicators() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isGlitching, setIsGlitching] = useState(false);
   const [isPowered, setIsPowered] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const indicators = [
     {
@@ -24,21 +25,33 @@ function TrustIndicators() {
     }
   ];
 
-  // Rotate indicators every 3 seconds when powered
   useEffect(() => {
     if (!isPowered) return;
-    
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % indicators.length);
+      setProgress(0);
+      document.getElementById("tick")?.play();
     }, 6000);
 
     return () => clearInterval(interval);
   }, [isPowered]);
 
-  // Trigger glitch effect every minute when powered
   useEffect(() => {
     if (!isPowered) return;
-    
+
+    const tick = 100;
+    const duration = 6000;
+    const progressInterval = setInterval(() => {
+      setProgress((p) => (p + tick >= duration ? 0 : p + tick));
+    }, tick);
+
+    return () => clearInterval(progressInterval);
+  }, [isPowered]);
+
+  useEffect(() => {
+    if (!isPowered) return;
+
     const glitchInterval = setInterval(() => {
       setIsGlitching(true);
       setTimeout(() => setIsGlitching(false), 1000);
@@ -49,9 +62,9 @@ function TrustIndicators() {
 
   return (
     <section className="py-4 bg-gradient-to-br from-gray-900 to-gray-800">
+      <audio id="tick" src="/sfx/glitch.mp3" preload="auto"></audio>
       <div className="max-w-2xl mx-auto px-8 sm:px-6 lg:px-8">
-        {/* TV Container */}
-        <motion.div 
+        <motion.div
           className={`relative rounded-2xl overflow-hidden ${isGlitching ? 'animate-glitch' : ''}`}
           style={{
             background: 'linear-gradient(to bottom, #000 0%, #111 100%)',
@@ -60,25 +73,19 @@ function TrustIndicators() {
             transform: 'perspective(1000px) rotateX(2deg)'
           }}
         >
-          {/* TV Frame Details */}
+          <div className="absolute top-0 left-0 h-1 bg-cyan-400 z-30" style={{ width: `${(progress / 6000) * 100}%` }} />
           <div className="absolute inset-0 border-4 border-gray-800 rounded-xl pointer-events-none"></div>
-          
-          {/* Screen scanlines effect */}
           <div className="absolute inset-0 pointer-events-none bg-scanline opacity-10 z-20"></div>
-          
-          {/* Screen flicker effect */}
-          <div 
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%)',
-              backgroundSize: '100% 10px',
-              animation: 'flicker 1.70s infinite'
-            }}
-          ></div>
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%)',
+            backgroundSize: '100% 10px',
+            animation: 'flicker 1.70s infinite'
+          }}></div>
 
-          {/* Content */}
           <div className="relative p-8">
-            {/* Display area */}
+            <div className="absolute top-0 right-0 text-xs text-cyan-300 opacity-70 p-2">
+              <span>Próximo: {indicators[(currentIndex + 1) % indicators.length].title}</span>
+            </div>
             <AnimatePresence mode="wait">
               {isPowered && (
                 <motion.div
@@ -105,16 +112,14 @@ function TrustIndicators() {
             </AnimatePresence>
           </div>
 
-          {/* Power Button - Now positioned lower on the right side */}
           <motion.button
             onClick={() => setIsPowered(!isPowered)}
-            className="absolute right-2 bottom-2"
-            whileHover={{ scale: 0.1 }}
-            whileTap={{ scale: 0.3 }}
+            className="absolute right-2 bottom-2 cursor-pointer"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            title={isPowered ? "Desligar" : "Ligar"}
           >
-            <div className="w-4 h-4 rounded-full bg-red-600 shadow-glow flex items-center justify-center border-2 border-gray-800">
-              <div className="w-4 h-4 rounded-full bg-red-800"></div>
-            </div>
+            <div className={`w-5 h-5 rounded-full ${isPowered ? 'bg-red-500' : 'bg-gray-600'} shadow-md border-2 border-white`}></div>
           </motion.button>
         </motion.div>
       </div>
