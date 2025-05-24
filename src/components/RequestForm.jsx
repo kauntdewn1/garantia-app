@@ -79,11 +79,11 @@ function RequestForm() {
               <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">🕐</span>
-                  <span>Resposta em até 24h</span>
+                  <span>Resposta em até 12h</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-lg">🔒</span>
-                  <span>Garantia aprovada pela SUSEP</span>
+                  <span>Garantia aprovada</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-lg">📄</span>
