@@ -23,7 +23,8 @@ function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              Não perca mais licitações por falta de seguro. Emitimos sua apólice de forma rápida e segura, atendendo todas as exigências da Lei 14.133/21.
+              Receba sua Apólice em menos de 12h e pare de perder contratos públicos por burocracia. 
+              <br/> Não seja engolido pela nova Lei 14.133/21.
             </motion.p>
             <motion.div 
               className="mt-10 flex gap-4"
