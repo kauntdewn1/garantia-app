@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { app } from '../firebase';
+import toast, { Toaster } from 'react-hot-toast';
 
 function RequestForm() {
+  const auth = getAuth(app);
+  const [user, loading] = useAuthState(auth);
   const [formData, setFormData] = useState({
     edital: '',
     licitacao: null,
@@ -15,12 +21,62 @@ function RequestForm() {
     cartao_cnpj_assegurado: null,
   });
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      toast.success('Login realizado com sucesso!');
+    } catch (error) {
+      console.error('Error signing in:', error);
+      toast.error('Erro ao fazer login. Tente novamente.');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Form submission logic will be implemented here
   };
 
   const inputClasses = "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-gray-150";
+
+  if (loading) {
+    return (
+      <section id="form" className="py-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">Carregando...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!user) {
+    return (
+      <section id="form" className="py-24 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="bg-white shadow-xl rounded-lg overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="px-6 py-8 text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-8">
+                Faça login para solicitar sua cotação
+              </h2>
+              <button
+                onClick={handleGoogleSignIn}
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary hover:bg-secondary transition-colors duration-300"
+              >
+                <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5 mr-2" />
+                Entrar com Google
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="form" className="py-24 bg-gray-50">
@@ -33,9 +89,17 @@ function RequestForm() {
           transition={{ duration: 0.5 }}
         >
           <div className="px-6 py-8">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
-              Solicite sua Cotação
-            </h2>
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Solicite sua Cotação
+              </h2>
+              <button
+                onClick={() => auth.signOut()}
+                className="text-sm text-gray-500 hover:text-gray-700"
+              >
+                Sair
+              </button>
+            </div>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -149,6 +213,7 @@ function RequestForm() {
           </div>
         </motion.div>
       </div>
+      <Toaster position="top-right" />
     </section>
   );
 }
