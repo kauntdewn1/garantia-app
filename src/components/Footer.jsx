@@ -13,7 +13,7 @@ function Footer() {
               className="h-10 brightness-0 invert"
             />
             <p className="mt-4 text-gray-400 text-sm">
-              © {new Date().getFullYear()} MG Riscos. Todos os direitos reservados.
+              © {new Date().getFullYear()} MG Gestão de Riscos e Corretora de Seguros - CNPJ 41.455.034/0001-58 - SUSEP 212112830.
             </p>
           </div>
           <div className="mt-6 md:mt-0 flex flex-col md:flex-row items-center gap-4 md:gap-8">
