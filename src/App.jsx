@@ -24,11 +24,11 @@ function App() {
           <Route path="/" element={
             <main>
               <Hero />
+              <RequestForm />
               <Bullets />
               <Features />
               <Countdown />
               <LeadMagnet />
-              <RequestForm />
             </main>
           } />
         </Routes>
