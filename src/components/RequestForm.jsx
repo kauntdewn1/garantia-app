@@ -64,9 +64,9 @@ function RequestForm() {
               <h2 className="text-2xl font-bold text-gray-900 mb-8">
                 Sua próxima licitação começa aqui.
               </h2>
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">
+              < className="text-2xl font-bold text-gray-900 mb-8">
                 Receba sua apólice de Seguro Garantia em até 24h. Sem papelada. Sem enrolação. 100% legal e digital.
-              </h3>
+              >
               <button
                 onClick={handleGoogleSignIn}
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary hover:bg-secondary transition-colors duration-300"
