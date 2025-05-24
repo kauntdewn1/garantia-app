@@ -29,7 +29,7 @@ function TrustIndicators() {
     if (!isPowered) return;
     
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % indicators.length);
+      setCurrentIndex((prev) => (prev + 3) % indicators.length);
     }, 6000);
 
     return () => clearInterval(interval);
