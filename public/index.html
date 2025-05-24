@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seguro Garantia Licitação | MG Riscos</title>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <section id="hero">
+      <h1>❌ FOI REPROVADO NA LICITAÇÃO POR FALTA DE SEGURO?</h1>
+      <h2>💣 SEGURA ESSA: AQUI A GENTE RESOLVE EM MENOS DE 24H, SEM PAPO, SEM BUROCRACIA!</h2>
+      <p>📜 A Nova Lei 14.133/21 veio pra separar os moleque dos empresário de verdade. Agora é preto no branco: <span class="highlight">sem seguro garantia, sem contrato.</span></p>
+      <p>🚨 Chega de perder edital por falta de documento. A MG Riscos resolve sua apólice em tempo recorde. Sem frescura. Só resultado.</p>
+    </section>
+    
+    <form class="space-y-12">
+      <section id="licitacao">
+        <h2 class="text-2xl font-bold mb-4">📂 Envie os dados da LICITAÇÃO:</h2>
+        <div class="grid grid-cols-1 gap-6">
+          <div>
+            <label for="edital" class="block mb-1 text-gray-300">Número do Edital:</label>
+            <input type="text" id="edital" name="edital" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600" required>
+          </div>
+          <div>
+            <label for="licitacao" class="block mb-1 text-gray-300">Anexe o PDF da Licitação:</label>
+            <input type="file" id="licitacao" name="licitacao" accept="application/pdf" class="w-full text-gray-200">
+          </div>
+        </div>
+      </section>
+      
+      <section id="tomador">
+        <h2 class="text-2xl font-bold mb-4">🏢 Dados do TOMADOR (quem vai contratar o seguro):</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div><label class="block mb-1 text-gray-300">Nome da Empresa:</label><input type="text" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600" required></div>
+          <div><label class="block mb-1 text-gray-300">CNPJ:</label><input type="text" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600" required></div>
+          <div class="md:col-span-2"><label class="block mb-1 text-gray-300">Endereço:</label><input type="text" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600"></div>
+          <div class="md:col-span-2"><label class="block mb-1 text-gray-300">Cartão CNPJ (opcional):</label><input type="file" class="w-full text-gray-200"></div>
+        </div>
+      </section>
+        
+        <div class="form-group">
+          <label for="cnpj_tomador">CNPJ:</label>
+          <input type="text" id="cnpj_tomador" name="cnpj_tomador" required placeholder="00.000.000/0000-00">
+          <div class="error" id="cnpj_tomador-error">Por favor, informe um CNPJ válido.</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="endereco_tomador">Endereço:</label>
+          <input type="text" id="endereco_tomador" name="endereco_tomador">
+        </div>
+        
+        <div class="form-group">
+          <label for="cartao_cnpj_tomador">Cartão CNPJ (opcional):</label>
+          <input type="file" id="cartao_cnpj_tomador" name="cartao_cnpj_tomador" accept="application/pdf,image/*">
+        </div>
+      </section>
+      
+      <section id="assegurado">
+        <h2 class="text-2xl font-bold mb-4">🏢 Dados do ASSEGURADO:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div><label class="block mb-1 text-gray-300">Nome da Empresa:</label><input type="text" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600" required></div>
+          <div><label class="block mb-1 text-gray-300">CNPJ:</label><input type="text" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600" required></div>
+          <div class="md:col-span-2"><label class="block mb-1 text-gray-300">Endereço:</label><input type="text" class="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-600"></div>
+          <div class="md:col-span-2"><label class="block mb-1 text-gray-300">Cartão CNPJ (opcional):</label><input type="file" class="w-full text-gray-200"></div>
+        </div>
+      </section>
+        
+        <div class="form-group">
+          <label for="cnpj_assegurado">CNPJ:</label>
+          <input type="text" id="cnpj_assegurado" name="cnpj_assegurado" required placeholder="00.000.000/0000-00">
+          <div class="error" id="cnpj_assegurado-error">Por favor, informe um CNPJ válido.</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="endereco_assegurado">Endereço:</label>
+          <input type="text" id="endereco_assegurado" name="endereco_assegurado">
+        </div>
+        
+        <div class="form-group">
+          <label for="cartao_cnpj_assegurado">Cartão CNPJ (opcional):</label>
+          <input type="file" id="cartao_cnpj_assegurado" name="cartao_cnpj_assegurado" accept="application/pdf,image/*">
+        </div>
+      </section>
+      
+      <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-full font-bold hover:from-secondary hover:to-primary transition-all">📩 ENVIAR E RECEBER A COTAÇÃO</button>
+      <div class="loading" id="loading">Enviando sua solicitação</div>
+      <div class="success-message" id="success-message">Sua solicitação foi enviada com sucesso! Entraremos em contato em breve.</div>
+      
+      <!-- Barra de progresso -->
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+        <div class="progress-text"></div>
+      </div>
+    </form>
+  </div>
+  
+  <footer>
+    MG RISCOS<br>
+    e-mail: <a href="mailto:licitacoes@mgriscos.com" style="color:white;">licitacoes@mgriscos.com</a>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/form-validation.js"></script>
+  <script src="js/file-upload.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
