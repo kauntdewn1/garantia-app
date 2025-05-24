@@ -5,7 +5,7 @@ function Bullets() {
   const bullets = [
     {
       icon: '⚡',
-      text: 'Aprovação em até 24h – Seguro entregue no seu e-mail, pronto para licitar.'
+      text: 'Aprovação em até 24h – </br> Seguro entregue no seu e-mail, pronto para licitar.'
     },
     {
       icon: '🔐',
