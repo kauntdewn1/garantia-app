@@ -22,26 +22,27 @@ const features = [
 const partners = [
   {
     name: 'FENACOR',
-    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/fenacor.png?alt=media&token=85e04073-5b81-481e-950e-0c07e2e48a25'
+    image: '/assets/fenacor.png'
   },
   {
     name: 'Grupo A2',
-    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/grupoa2.png?alt=media&token=efcfd161-2bd3-4407-837b-d4dbe7065859'
+    image: '/assets/grupoa2.png'
   },
   {
     name: 'IBRACOR',
-    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/ibracor.png?alt=media&token=f5656961-b567-4415-8d9e-1d8cd2938869'
+    image: '/assets/ibracor.png'
   },
   {
     name: 'SUSEP',
-    image: 'https://storage.googleapis.com/garantia-app-f58a1.appspot.com/susep.png?alt=media&token=21704588-30fc-4d0d-adcd-8ece7f19e2b6'
+    image: '/assets/susep.png'
   }
 ];
 
 function Features() {
   const handleImageError = (e, partner) => {
     console.error(`Error loading image for ${partner.name}:`, e);
-    console.log('Image URL:', e.target.src);
+    // Provide a fallback image or hide the image on error
+    e.target.style.display = 'none';
   };
 
   return (
@@ -106,7 +107,6 @@ function Features() {
                   alt={partner.name}
                   className="h-16 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                   onError={(e) => handleImageError(e, partner)}
-                  onLoad={() => console.log(`Image loaded successfully: ${partner.name}`)}
                 />
               </motion.div>
             ))}
