@@ -61,10 +61,10 @@ function TrustIndicators() {
           }}
         >
           {/* TV Frame Details */}
-          <div className="absolute inset-0 border-4 border-gray-600 rounded-xl pointer-events-none"></div>
+          <div className="absolute inset-0 border-4 border-gray-800 rounded-xl pointer-events-none"></div>
           
           {/* Screen scanlines effect */}
-          <div className="absolute inset-0 pointer-events-none bg-scanline opacity-50 z-20"></div>
+          <div className="absolute inset-0 pointer-events-none bg-scanline opacity-10 z-20"></div>
           
           {/* Screen flicker effect */}
           <div 
