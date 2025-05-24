@@ -112,7 +112,7 @@ function TrustIndicators() {
             whileHover={{ scale: 0.1 }}
             whileTap={{ scale: 0.3 }}
           >
-            <div className="w-4 h-4 rounded-full bg-red-600 shadow-glow flex items-center justify-center border-4 border-gray-800">
+            <div className="w-4 h-4 rounded-full bg-red-600 shadow-glow flex items-center justify-center border-2 border-gray-800">
               <div className="w-4 h-4 rounded-full bg-red-800"></div>
             </div>
           </motion.button>
