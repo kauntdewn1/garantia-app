@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Bullets from './components/Bullets'
 import Features from './components/Features'
 import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <Bullets />
         <Features />
         <RequestForm />
       </main>
