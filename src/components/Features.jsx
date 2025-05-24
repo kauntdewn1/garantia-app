@@ -19,6 +19,25 @@ const features = [
   }
 ];
 
+const partners = [
+  {
+    name: 'FENACOR',
+    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/fenacor.png?alt=media'
+  },
+  {
+    name: 'Grupo A2',
+    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/grupoa2.png?alt=media'
+  },
+  {
+    name: 'IBRACOR',
+    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/ibracor.png?alt=media'
+  },
+  {
+    name: 'SUSEP',
+    image: 'https://firebasestorage.googleapis.com/v0/b/garantia-app-f58a1.appspot.com/o/susep.png?alt=media'
+  }
+];
+
 function Features() {
   return (
     <section id="features" className="py-24 bg-white">
@@ -28,7 +47,7 @@ function Features() {
             Benefícios
           </h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Porque dezenas de empresas estão migrando para aGestão de Riscos e Corretora de Seguros – e vencendo licitações com apólices emitidas rapidamente.
+            Porque dezenas de empresas estão migrando para a Gestão de Riscos e Corretora de Seguros – e vencendo licitações com apólices emitidas rapidamente.
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
             Aceleramos sua participação em editais com seguro garantia digital, aprovado em horas e aceito em todo o Brasil. Simples e rápido.
@@ -57,6 +76,31 @@ function Features() {
                     {feature.description}
                   </p>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Partners Section */}
+        <div className="mt-24">
+          <h3 className="text-center text-2xl font-semibold text-gray-900 mb-12">
+            Parceiros e Certificações
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+            {partners.map((partner, index) => (
+              <motion.div
+                key={partner.name}
+                className="flex justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+              >
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  className="h-16 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                />
               </motion.div>
             ))}
           </div>
