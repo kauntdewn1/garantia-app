@@ -3,45 +3,48 @@ import { motion } from 'framer-motion';
 
 function Hero() {
   return (
-    <div className="relative bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <div className="sm:text-center lg:text-left">
-              <motion.h1 
-                className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+    <div className="relative min-h-screen bg-gradient-to-br from-primary to-secondary overflow-hidden flex items-center">
+      <div className="absolute inset-0 bg-[url('/assets/lg_hrz_transp.png')] bg-center bg-no-repeat opacity-5"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
+        <div className="relative z-10">
+          <div className="text-left">
+            <motion.h1 
+              className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="block">Seguro Garantia para</span>
+              <span className="block text-blue-200">Licitações em 24h</span>
+            </motion.h1>
+            <motion.p 
+              className="mt-6 text-xl text-gray-100 max-w-3xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              Não perca mais licitações por falta de seguro. Emitimos sua apólice de forma rápida e segura, atendendo todas as exigências da Lei 14.133/21.
+            </motion.p>
+            <motion.div 
+              className="mt-10 flex gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <a
+                href="#form"
+                className="px-8 py-4 rounded-lg bg-white text-primary font-semibold hover:bg-blue-50 transition-colors duration-300 shadow-lg"
               >
-                <span className="block">Seguro Garantia para</span>
-                <span className="block text-primary">Licitações em 24h</span>
-              </motion.h1>
-              <motion.p 
-                className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                Solicitar Agora
+              </a>
+              <a
+                href="#features"
+                className="px-8 py-4 rounded-lg border-2 border-white text-white font-semibold hover:bg-white/10 transition-colors duration-300"
               >
-                Não perca mais licitações por falta de seguro. Emitimos sua apólice de forma rápida e segura, atendendo todas as exigências da Lei 14.133/21.
-              </motion.p>
-              <motion.div 
-                className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-              >
-                <div className="rounded-md shadow">
-                  <a
-                    href="#form"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-red-700 md:py-4 md:text-lg md:px-10"
-                  >
-                    Solicitar Agora
-                  </a>
-                </div>
-              </motion.div>
-            </div>
-          </main>
+                Saiba Mais
+              </a>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

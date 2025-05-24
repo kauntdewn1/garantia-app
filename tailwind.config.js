@@ -7,11 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#e60000",
-        secondary: "#222222",
+        primary: "#233069",
+        secondary: "#0e3e7d",
       },
       fontFamily: {
         sans: ['Inter var', 'sans-serif'],
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },
