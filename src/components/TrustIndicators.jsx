@@ -78,13 +78,6 @@ function TrustIndicators() {
 
           {/* Content */}
           <div className="relative p-8">
-            {/* TV Power indicator */}
-            <div 
-              className={`absolute top-4 right-4 w-3 h-3 rounded-full transition-all duration-500 ${
-                isPowered ? 'bg-red-500 shadow-glow' : 'bg-red-900'
-              }`}
-            ></div>
-            
             {/* Display area */}
             <AnimatePresence mode="wait">
               {isPowered && (
@@ -112,10 +105,10 @@ function TrustIndicators() {
             </AnimatePresence>
           </div>
 
-          {/* Power Button */}
+          {/* Power Button - Now on the right side */}
           <motion.button
             onClick={() => setIsPowered(!isPowered)}
-            className="absolute bottom-4 left-1/2 transform -translate-x-1/2"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
