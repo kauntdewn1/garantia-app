@@ -1,0 +1,74 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 🔹 Funções Auxiliares
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+
+    function isValidTimestamp(ts) {
+      return ts is timestamp;
+    }
+
+    function isValidCNPJ(cnpj) {
+      return cnpj is string && cnpj.matches('^\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}$');
+    }
+
+    function isValidURL(url) {
+      return url is string && url.matches('^https://.*');
+    }
+
+    function isValidStatus(status) {
+      return status in ['novo', 'em_analise', 'aprovado', 'rejeitado'];
+    }
+
+    // 🔸 Coleção de Solicitações
+    match /solicitacoes/{solicitacaoId} {
+      allow read, update: if isAdmin();
+
+      allow create: if 
+        request.resource.data.keys().hasAll([
+          'timestamp', 'edital', 'licitacaoURL',
+          'tomador', 'assegurado', 'status'
+        ]) &&
+        isValidTimestamp(request.resource.data.timestamp) &&
+        request.resource.data.edital is string &&
+        isValidURL(request.resource.data.licitacaoURL) &&
+
+        request.resource.data.tomador.empresa is string &&
+        isValidCNPJ(request.resource.data.tomador.cnpj) &&
+        request.resource.data.tomador.endereco is string &&
+        (request.resource.data.tomador.cartaoCNPJURL == null || isValidURL(request.resource.data.tomador.cartaoCNPJURL)) &&
+
+        request.resource.data.assegurado.empresa is string &&
+        isValidCNPJ(request.resource.data.assegurado.cnpj) &&
+        request.resource.data.assegurado.endereco is string &&
+        (request.resource.data.assegurado.cartaoCNPJURL == null || isValidURL(request.resource.data.assegurado.cartaoCNPJURL)) &&
+        isValidStatus(request.resource.data.status);
+      
+      allow delete: if false;
+    }
+
+    // 🔸 Coleção de Usuários
+    match /users/{userId} {
+      allow read, write: if isUser(userId);
+    }
+
+    // 🔸 Coleção de Logs
+    match /logs/{logId} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if false;
+    }
+  }
+}
