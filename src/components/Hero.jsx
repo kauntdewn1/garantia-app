@@ -1,7 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-function Hero() {
+function Hero({ onShowForm }) {
+  const handleShowForm = () => {
+    onShowForm();
+  };
+
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-primary to-secondary overflow-hidden flex items-center">
       <div className="absolute inset-0 bg-[url('/assets/lg_hrz_transp.png')] bg-center bg-no-repeat opacity-5"></div>
@@ -67,12 +71,12 @@ function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <a
-                href="#form"
+              <button
+                onClick={handleShowForm}
                 className="px-8 py-4 rounded-lg bg-white text-primary font-semibold hover:bg-blue-50 transition-colors duration-300 shadow-lg"
               >
                 Solicitar Agora
-              </a>
+              </button>
               <a
                 href="#features"
                 className="px-8 py-4 rounded-lg border-2 border-white text-white font-semibold hover:bg-white/10 transition-colors duration-300"

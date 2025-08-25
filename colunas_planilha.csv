@@ -1,0 +1,2 @@
+Timestamp,Edital,Empresa Tomador,CNPJ Tomador,Endereço Tomador,Empresa Assegurado,CNPJ Assegurado,Endereço Assegurado,Licitação URL,Cartão CNPJ Tomador,Cartão CNPJ Assegurado,Status
+2024-01-01T00:00:00.000Z,Exemplo Edital,Empresa Exemplo,12.345.678/0001-90,Endereço Exemplo,Empresa Assegurado,98.765.432/0001-10,Endereço Assegurado,https://exemplo.com,https://exemplo.com/arquivo1,https://exemplo.com/arquivo2,Nova Solicitação

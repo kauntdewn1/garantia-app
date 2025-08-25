@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { app } from '../firebase';
-import toast from 'react-hot-toast';
 
-function Header() {
+function Header({ onShowForm }) {
   const [scrolled, setScrolled] = useState(false);
-  const auth = getAuth(app);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,17 +11,8 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleGoogleSignIn = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-      toast.success('Login realizado com sucesso!');
-      // Scroll to form after successful login
-      document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' });
-    } catch (error) {
-      console.error('Error signing in:', error);
-      toast.error('Erro ao fazer login. Tente novamente.');
-    }
+  const handleShowForm = () => {
+    onShowForm();
   };
 
   return (
@@ -35,29 +21,29 @@ function Header() {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <img
-              src="/assets/lg_hrz_transp.png"
+              src={scrolled ? "/assets/lg_hrz_transp1.png" : "/assets/lg_hrz_transp.png"}
               alt="MG Riscos Logo"
-              className="h-12"
+              className="h-12 transition-all duration-300"
             />
           </div>
           <nav className="hidden md:flex space-x-8">
-            <a href="#features" className="text-primary hover:text-secondary transition-colors">
+            <a href="#features" className={`transition-colors ${scrolled ? 'text-primary hover:text-secondary' : 'text-white hover:text-gray-200'}`}>
               Recursos
             </a>
-            <a href="#about" className="text-primary hover:text-secondary transition-colors">
+            <a href="#about" className={`transition-colors ${scrolled ? 'text-primary hover:text-secondary' : 'text-white hover:text-gray-200'}`}>
               Sobre
             </a>
-            <a href="#contact" className="text-primary hover:text-secondary transition-colors">
+            <a href="#contact" className={`transition-colors ${scrolled ? 'text-primary hover:text-secondary' : 'text-white hover:text-gray-200'}`}>
               Contato
             </a>
           </nav>
           <div>
             <button
-              onClick={handleGoogleSignIn}
+              onClick={handleShowForm}
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary hover:bg-secondary transition-colors duration-300"
             >
-              <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5 mr-2" />
-              Acessar agora
+              <span className="mr-2">📝</span>
+              Solicitar Cotação
             </button>
           </div>
         </div>

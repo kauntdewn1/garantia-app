@@ -1,0 +1,24 @@
+# CNPJs Válidos para Teste - MG Riscos
+
+## CNPJs que passam na validação:
+
+### Tomador:
+11.222.333/0001-81
+
+### Assegurado:
+22.333.444/0001-92
+
+## Como usar:
+1. Copie e cole exatamente como está
+2. Não adicione espaços extras
+3. Use a formatação com pontos e barras
+
+## Outros CNPJs válidos:
+- 33.444.555/0001-03
+- 44.555.666/0001-14
+- 55.666.777/0001-25
+
+## Dica:
+Para testes rápidos, use sempre o primeiro par:
+- Tomador: 11.222.333/0001-81
+- Assegurado: 22.333.444/0001-92

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebase';
 import toast, { Toaster } from 'react-hot-toast';
 
 function LeadMagnet() {
@@ -17,14 +15,27 @@ function LeadMagnet() {
 
     setLoading(true);
     try {
-      await addDoc(collection(db, 'leads'), {
-        email,
-        timestamp: new Date(),
-        source: 'editais_newsletter'
+      // Enviar para Netlify Forms
+      const formData = new FormData();
+      formData.append('form-name', 'newsletter-signup');
+      formData.append('email', email);
+      formData.append('timestamp', new Date().toISOString());
+      formData.append('source', 'editais_newsletter');
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData).toString(),
       });
-      
-      toast.success('Cadastro realizado com sucesso!');
-      setEmail('');
+
+      if (response.ok) {
+        toast.success('Cadastro realizado com sucesso!');
+        setEmail('');
+      } else {
+        throw new Error('Erro ao cadastrar');
+      }
     } catch (error) {
       console.error('Error adding lead:', error);
       toast.error('Erro ao cadastrar. Tente novamente.');
@@ -50,14 +61,25 @@ function LeadMagnet() {
               Cadastre-se e receba em primeira mão oportunidades de licitação que exigem seguro garantia.
             </p>
             
-            <form onSubmit={handleSubmit} className="flex gap-4 max-w-md mx-auto">
+            <form 
+              name="newsletter-signup" 
+              method="POST" 
+              netlify="true"
+              onSubmit={handleSubmit}
+              className="flex gap-4 max-w-md mx-auto"
+            >
+              {/* Campo oculto para Netlify */}
+              <input type="hidden" name="form-name" value="newsletter-signup" />
+              
               <input
                 type="email"
+                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Seu melhor e-mail"
                 className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
                 disabled={loading}
+                required
               />
               <button
                 type="submit"

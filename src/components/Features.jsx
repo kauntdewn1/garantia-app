@@ -49,66 +49,73 @@ function Features() {
   };
 
   return (
-    <section id="features" className="py-24 bg-white">
+    <section id="features" className="py-8 sm:py-12 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:text-right">
-          <h2 className="text-base text-primary font-semibold tracking-wide uppercase">
+        {/* Header - Compacto */}
+        <div className="text-center lg:text-right mb-8 sm:mb-12">
+          <h2 className="text-xs sm:text-sm text-primary font-semibold tracking-wide uppercase mb-2">
             Benefícios
           </h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Porque dezenas de empresas estão migrando para a Gestão de Riscos e Corretora de Seguros – e vencendo licitações com apólices emitidas rapidamente.
+          <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl leading-tight font-bold text-gray-900 mb-3">
+            Porque dezenas de empresas estão migrando para a MG Riscos
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Aceleramos sua participação em editais com seguro garantia digital, aprovado em horas e aceito em todo o Brasil. Simples e rápido.
+          <p className="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto lg:ml-auto">
+            Aceleramos sua participação em editais com seguro garantia digital, aprovado em horas.
           </p>
         </div>
 
-        <div className="mt-20">
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                className="relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className="flex items-center justify-center h-16 w-16 rounded-full bg-primary text-white text-2xl mb-4">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+        {/* Features - Layout Compacto */}
+        <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              className="bg-gray-50 rounded-xl p-4 sm:p-5 lg:p-6 border border-gray-100"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+              <div className="flex items-start space-x-3 sm:space-x-4">
+                {/* Ícone Compacto */}
+                <div className="flex-shrink-0 flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 rounded-lg bg-primary text-white text-sm sm:text-base lg:text-lg shadow-sm">
+                  {feature.icon}
+                </div>
+                
+                {/* Conteúdo */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-500">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Partners Section */}
-        <div className="mt-24">
-          <h3 className="text-center text-2xl font-semibold text-gray-200 mb-12">
+        {/* Partners - Compacto */}
+        <div className="mt-12 sm:mt-16">
+          <h3 className="text-center text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-6 sm:mb-8">
             Parceiros e Certificações
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+          
+          {/* Grid Compacto */}
+          <div className="grid grid-cols-4 gap-3 sm:gap-4 lg:gap-6 items-center">
             {partners.map((partner, index) => (
               <motion.div
                 key={partner.name}
                 className="flex justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
                 <img
                   src={partner.image}
                   alt={partner.name}
-                  className="h-16 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  className="h-8 w-auto sm:h-10 lg:h-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                   onError={(e) => handleImageError(e, partner)}
                 />
               </motion.div>

@@ -1,45 +1,198 @@
-# MG Riscos - Plataforma de Solicitação de Seguro Garantia para Licitações
+# MG Riscos - Seguro Garantia para Licitações
 
-Bem-vindo à plataforma oficial da MG Gestão de Riscos e Corretora de Seguros. Este repositório visa documentar de forma transparente e funcional o fluxo de solicitação de apólice de seguro garantia conforme a Lei 14.133/21 para empresas participantes de licitações públicas.
+## 🚀 **Versão Netlify - Formulário de Cotação Automatizado**
 
-## Objetivo
+Sistema moderno para solicitação de cotação de seguro garantia para licitações públicas, construído com React, Vite e deployado no Netlify.
 
-Fornecer uma interface amigável e segura para tomadores e assegurados enviarem os dados necessários para emissão de apólice de seguro garantia.
+## ✨ **Funcionalidades**
 
-## Funcionalidades
+- 📝 **Formulário inteligente** com validação em tempo real
+- 📎 **Upload de arquivos** (PDFs, imagens) via Netlify Functions
+- 🔒 **Validação de CNPJ** automática
+- 📱 **Design responsivo** com Tailwind CSS
+- ⚡ **Performance otimizada** com Vite
+- 🚀 **Deploy automático** no Netlify
 
-* Upload de PDF do edital da licitação
-* Preenchimento dos dados do tomador e assegurado
-* Upload opcional de documentos adicionais (cartão CNPJ)
-* Integração futura com Google Login para segurança e rastreabilidade
-* Armazenamento seguro em banco de dados
+## 🛠️ **Tecnologias**
 
-## Requisitos
+- **Frontend**: React 18 + Vite
+- **Estilização**: Tailwind CSS
+- **Animações**: Framer Motion
+- **Formulários**: Netlify Forms
+- **Upload**: Netlify Functions
+- **Deploy**: Netlify
+- **Testes**: Jest
 
-* Navegador moderno (Chrome, Firefox, Edge)
-* Conexão segura com HTTPS
-* Permissão de upload de arquivos
+## 🚀 **Quick Start**
 
-## Como funciona
+### 1. **Instalação**
+```bash
+# Clone o repositório
+git clone <url-do-repositorio>
+cd mg-riscos-seguro-new
 
-1. O usuário acessa a landing page
-2. Informa o número do edital e anexa o PDF
-3. Preenche os dados da empresa tomadora e da empresa assegurada
-4. Envia os dados para nossa equipe técnica
-5. Nossa equipe realiza a cotação e retorna com proposta via e-mail
+# Instale as dependências
+make install
+# ou
+npm install
+```
 
-## Garantias
+### 2. **Desenvolvimento**
+```bash
+# Inicie o servidor de desenvolvimento
+make dev
+# ou
+npm run dev
+```
 
-Todos os dados enviados passam por criptografia SSL e armazenamento temporário apenas para fins de análise contratual. A MG Riscos é uma corretora registrada, e nossos consultores seguem as normas da Susep.
+### 3. **Build e Deploy**
+```bash
+# Build para produção
+make build
 
-## Contato
+# Deploy para Netlify
+make deploy
+```
 
-Em caso de dúvidas ou problemas técnicos:
+## 📋 **Comandos Disponíveis**
 
-* E-mail: [licitacoes@mgriscos.com](mailto:licitacoes@mgriscos.com)
-* Site institucional: [www.mgriscos.com](https://www.mgriscos.com)
+```bash
+make help          # Lista todos os comandos
+make install       # Instala dependências
+make dev           # Inicia servidor de desenvolvimento
+make build         # Cria build de produção
+make preview       # Preview do build
+make test          # Executa testes
+make clean         # Limpa arquivos temporários
+make deploy        # Deploy para Netlify
+```
+
+## 🌐 **Configuração Netlify**
+
+### **1. Login no Netlify**
+```bash
+make netlify-login
+```
+
+### **2. Inicializar Projeto**
+```bash
+make netlify-init
+```
+
+### **3. Deploy Automático**
+```bash
+make deploy
+```
+
+## 📁 **Estrutura do Projeto**
+
+```
+├── src/
+│   ├── components/          # Componentes React
+│   │   ├── RequestForm.jsx  # Formulário principal
+│   │   ├── Header.jsx       # Cabeçalho
+│   │   └── ...
+│   ├── utils/
+│   │   └── netlify.js       # Utilitários Netlify
+│   └── App.jsx              # App principal
+├── netlify/
+│   └── functions/           # Netlify Functions
+│       └── upload.js        # Função de upload
+├── public/                  # Arquivos estáticos
+├── netlify.toml            # Configuração Netlify
+└── vite.config.js          # Configuração Vite
+```
+
+## 🔧 **Configuração de Formulários**
+
+O projeto usa **Netlify Forms** para processamento automático:
+
+```html
+<form name="cotacao-seguro" method="POST" netlify>
+  <!-- Campos do formulário -->
+</form>
+```
+
+### **Campos Obrigatórios:**
+- Número do Edital
+- PDF da Licitação
+- Dados do Tomador (Empresa + CNPJ)
+- Dados do Assegurado (Empresa + CNPJ)
+
+### **Campos Opcionais:**
+- Endereços
+- Cartões CNPJ
+
+## 📤 **Upload de Arquivos**
+
+Arquivos são processados via **Netlify Functions**:
+
+- **Tamanho máximo**: 5MB
+- **Formatos aceitos**: PDF, JPG, PNG, GIF
+- **Validação**: Tipo e tamanho
+- **Storage**: Simulado (em produção, use Cloudinary/AWS S3)
+
+## 🧪 **Testes**
+
+```bash
+# Executar testes
+make test
+
+# Testes em modo watch
+make test-watch
+
+# Testes com cobertura
+make test-coverage
+```
+
+## 🚀 **Deploy**
+
+### **Deploy Automático**
+```bash
+make deploy
+```
+
+### **Deploy Manual**
+```bash
+# Build
+make build
+
+# Deploy apenas do build
+make deploy-build
+```
+
+## 🔒 **Segurança**
+
+- ✅ Validação de formulários no cliente e servidor
+- ✅ Validação de tipos de arquivo
+- ✅ Limite de tamanho de arquivo
+- ✅ Validação de CNPJ
+- ✅ Headers de segurança configurados
+
+## 📊 **Monitoramento**
+
+- **Formulários**: Dashboard Netlify
+- **Funções**: Logs Netlify Functions
+- **Performance**: Lighthouse + Core Web Vitals
+
+## 🤝 **Contribuição**
+
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
+
+## 📄 **Licença**
+
+Este projeto está sob a licença MIT.
+
+## 📞 **Suporte**
+
+- **Email**: licitacoes@mgriscos.com
+- **Documentação**: [Netlify Docs](https://docs.netlify.com/)
+- **Issues**: GitHub Issues
 
 ---
 
-**Aviso legal:** Este sistema é meramente operacional e não representa garantia de aprovação de contrato junto à Administração Pública. Todas as informações fornecidas estão sujeitas a análise de risco.
-# garantia-app
+**Desenvolvido com ❤️ para MG Riscos**
