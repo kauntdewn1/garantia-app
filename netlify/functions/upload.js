@@ -1,6 +1,4 @@
-const { parse } = require('querystring');
-
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   // Habilitar CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',

@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
+[functions]
+  directory = "netlify/functions"
+
+[build.processing.forms]
+  enabled = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

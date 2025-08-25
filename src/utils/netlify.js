@@ -86,7 +86,7 @@ export function validateCNPJ(cnpj) {
   // Verifica se todos os dígitos são iguais
   if (/^(\d)\1+$/.test(cnpj)) return false;
   
-  // MODE TESTE: Aceitar CNPJs comuns para teste
+    // MODE TESTE: Aceitar CNPJs comuns para teste
   const testCNPJs = [
     '11222333000181', // 11.222.333/0001-81
     '22333444000192', // 22.333.444/0001-92
@@ -97,6 +97,7 @@ export function validateCNPJ(cnpj) {
   
   // Se for um CNPJ de teste, aceitar
   if (testCNPJs.includes(cnpj)) {
+    console.log('CNPJ de teste aceito:', cnpj);
     return true;
   }
   

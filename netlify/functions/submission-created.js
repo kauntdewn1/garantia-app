@@ -1,14 +1,13 @@
 const nodemailer = require('nodemailer');
-const { google } = require('googleapis');
+const fetch = require('node-fetch');
 
 /**
- * Netlify Function para processamento de formulários de cotação
+ * Netlify Function que intercepta automaticamente submissions de formulários
  * 
  * SEGURANÇA:
  * - Validação de entrada rigorosa
  * - Sanitização de dados
  * - Rate limiting implícito (Netlify)
- * - CORS configurado adequadamente
  * - Logs de auditoria
  */
 
@@ -21,132 +20,72 @@ const emailConfig = {
   }
 };
 
-// Configuração da planilha Google
-const spreadsheetConfig = {
-  spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
-  credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY)
-};
-
-// Configurar autenticação Google
-const auth = new google.auth.GoogleAuth({
-  credentials: spreadsheetConfig.credentials,
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
+// Configuração do webhook do Google App Script
+const WEBHOOK_URL = process.env.GOOGLE_WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbx.../exec';
 
 exports.handler = async (event) => {
-  // Habilitar CORS
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
-  };
-
-  // Responder a requisições OPTIONS (preflight)
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
-  }
-
   try {
-    // Verificar se é uma requisição POST
-    if (event.httpMethod !== 'POST') {
-      return {
-        statusCode: 405,
-        headers,
-        body: JSON.stringify({ error: 'Método não permitido' })
-      };
-    }
-
+    console.log('Submission recebido:', event.body);
+    
     // Parsear dados do formulário
-    let formData;
-    try {
-      formData = JSON.parse(event.body);
-    } catch (parseError) {
-      throw new Error('Dados do formulário inválidos');
-    }
+    const { payload } = JSON.parse(event.body);
     
     // Validar dados obrigatórios
     const requiredFields = ['edital', 'empresa_tomador', 'cnpj_tomador', 'empresa_assegurado', 'cnpj_assegurado'];
     for (const field of requiredFields) {
-      if (!formData[field] || formData[field].trim() === '') {
+      if (!payload[field] || payload[field].trim() === '') {
         throw new Error(`Campo obrigatório não preenchido: ${field}`);
       }
-    }
-    
-    // Validar tamanho dos dados
-    if (event.body.length > 1024 * 1024) { // 1MB
-      throw new Error('Dados do formulário muito grandes');
     }
 
     // Preparar dados para email
     const emailData = {
       from: process.env.EMAIL_USER,
       to: 'segurgary@gmail.com',
-      subject: `🚨 NOVA SOLICITAÇÃO DE COTAÇÃO - Edital: ${formData.edital}`,
-      html: generateEmailHTML(formData)
+      subject: `🚨 NOVA SOLICITAÇÃO DE COTAÇÃO - Edital: ${payload.edital}`,
+      html: generateEmailHTML(payload)
     };
 
     // Preparar dados para planilha
     const spreadsheetData = {
       timestamp: new Date().toISOString(),
-      edital: formData.edital,
-      empresa_tomador: formData.empresa_tomador,
-      cnpj_tomador: formData.cnpj_tomador,
-      endereco_tomador: formData.endereco_tomador || '',
-      empresa_assegurado: formData.empresa_assegurado,
-      cnpj_assegurado: formData.cnpj_assegurado,
-      endereco_assegurado: formData.endereco_assegurado || '',
-      licitacao_url: formData.licitacao || '',
-      cartao_cnpj_tomador_url: formData.cartao_cnpj_tomador || '',
-      cartao_cnpj_assegurado_url: formData.cartao_cnpj_assegurado || '',
+      edital: payload.edital,
+      empresa_tomador: payload.empresa_tomador,
+      cnpj_tomador: payload.cnpj_tomador,
+      endereco_tomador: payload.endereco_tomador || '',
+      empresa_assegurado: payload.empresa_assegurado,
+      cnpj_assegurado: payload.cnpj_assegurado,
+      endereco_assegurado: payload.endereco_assegurado || '',
+      licitacao_url: payload.licitacao || '',
+      cartao_cnpj_tomador_url: payload.cartao_cnpj_tomador || '',
+      cartao_cnpj_assegurado_url: payload.cartao_cnpj_assegurado || '',
       status: 'Nova Solicitação'
     };
 
     // Enviar email
     await sendEmail(emailData);
     
-    // Salvar na planilha
-    await saveToSpreadsheet(spreadsheetData);
+    // Enviar para Google Sheets via webhook
+    await sendToWebhook(spreadsheetData);
 
+    console.log('Processamento concluído com sucesso');
+    
     return {
       statusCode: 200,
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        success: true,
-        message: 'Solicitação processada com sucesso!'
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Solicitação processada com sucesso!' 
       })
     };
 
   } catch (error) {
     console.error('Erro no processamento:', error);
     
-    // Determinar status code baseado no tipo de erro
-    let statusCode = 500;
-    let errorMessage = 'Erro interno do servidor';
-    
-    if (error.message.includes('Campo obrigatório')) {
-      statusCode = 400;
-      errorMessage = error.message;
-    } else if (error.message.includes('JSON')) {
-      statusCode = 400;
-      errorMessage = 'Dados do formulário inválidos';
-    }
-    
     return {
-      statusCode,
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json'
-      },
+      statusCode: 500,
       body: JSON.stringify({
         success: false,
-        error: errorMessage
+        error: error.message || 'Erro interno do servidor'
       })
     };
   }
@@ -261,38 +200,32 @@ async function sendEmail(emailData) {
   });
 }
 
-// Função para salvar na planilha Google usando googleapis
-async function saveToSpreadsheet(data) {
+// Função para enviar dados para Google Sheets via webhook
+async function sendToWebhook(data) {
   try {
-    const sheets = google.sheets({ version: 'v4', auth });
+    console.log('Enviando dados para webhook:', WEBHOOK_URL);
     
-    // Preparar dados para a planilha
-    const values = [[
-      data.timestamp,
-      data.edital,
-      data.empresa_tomador,
-      data.cnpj_tomador,
-      data.endereco_tomador,
-      data.empresa_assegurado,
-      data.cnpj_assegurado,
-      data.endereco_assegurado,
-      data.licitacao_url,
-      data.cartao_cnpj_tomador_url,
-      data.cartao_cnpj_assegurado_url,
-      data.status
-    ]];
-    
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: spreadsheetConfig.spreadsheetId,
-      range: 'Página1!A1',
-      valueInputOption: 'RAW',
-      insertDataOption: 'INSERT_ROWS',
-      requestBody: { values }
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
     });
+
+    if (!response.ok) {
+      throw new Error(`Webhook retornou status ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Resposta do webhook:', result);
     
-    console.log('Dados salvos na planilha com sucesso');
+    if (result.result === 'success') {
+      console.log('Dados enviados para Google Sheets com sucesso');
+    } else {
+      throw new Error(`Webhook retornou erro: ${result.message || 'Erro desconhecido'}`);
+    }
+    
   } catch (error) {
-    console.error('Erro ao salvar na planilha:', error);
-    // Não falha o processo se a planilha der erro
+    console.error('Erro ao enviar para webhook:', error);
+    // Não falha o processo se o webhook der erro
   }
-} 
+}
