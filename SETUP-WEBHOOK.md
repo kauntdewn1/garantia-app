@@ -1,106 +1,56 @@
-# 🚀 Configuração do Webhook MG Riscos
+# 🚀 Configuração do Webhook SOBERANO (IPFS Lite)
 
-## 📧 **Configuração do Email (Gmail)**
+Este guia ensina como configurar o backend do MG Riscos usando apenas ferramentas do Google (Sheets + Apps Script), sem depender de servidores Node.js ou provedores como Netlify/Firebase.
 
-### 1. **Ativar 2FA no Gmail**
-- Acesse: https://myaccount.google.com/security
-- Ative "Verificação em duas etapas"
+## 📊 **Parte 1: Planilha Google**
 
-### 2. **Gerar App Password**
-- Acesse: https://myaccount.google.com/apppasswords
-- Selecione "Email" e "Outro (nome personalizado)"
-- Digite: "MG Riscos Webhook"
-- Clique em "Gerar"
-- **Copie a senha de 16 caracteres**
+1.  **Criar Planilha**: Acesse [sheets.google.com](https://sheets.google.com) e crie uma nova planilha chamada `MG Riscos - Solicitações`.
+2.  **Preparar Colunas**: Na primeira linha, crie os seguintes cabeçalhos (opcional, o script adicionará linhas mesmo sem eles):
+    - `Timestamp`, `Edital`, `Tomador`, `CNPJ Tomador`, `Endereço Tomador`, `Assegurado`, `CNPJ Assegurado`, `Endereço Assegurado`, `Licitação URL`, `CNPJ Tomador URL`, `CNPJ Assegurado URL`, `Status`.
 
-### 3. **Configurar Variáveis de Ambiente**
-```bash
-# No Netlify Dashboard > Site settings > Environment variables
-EMAIL_USER=segurgary@gmail.com
-EMAIL_PASS=sua_senha_de_16_caracteres
-```
+## ⚡ **Parte 2: Google App Script (O Webhook)**
 
-## 📊 **Configuração da Planilha Google**
+1.  **Abrir Editor**: Na sua planilha, vá em `Extensões` > `Apps Script`.
+2.  **Copiar Código**: Cole o conteúdo do arquivo `google-app-script.js` que está na raiz deste projeto.
+3.  **Configurar Email**: No código do Apps Script, localize a função `sendNotificationEmail` e altere o email do destinatário (atualmente `segurgary@gmail.com`) se desejar.
+4.  **Implantar**:
+    - Clique em `Implantar` > `Nova implantação`.
+    - Selecione o tipo `App da web`.
+    - Descrição: `MG Riscos Webhook`.
+    - Executar como: `Eu` (seu email).
+    - **Quem pode acessar: Qualquer pessoa** (Crucial para o IPFS conseguir enviar os dados).
+    - Clique em `Implantar` e autorize as permissões solicitadas.
+5.  **Copiar URL**: Ao final, você receberá uma **URL da Web App**. Copie esta URL.
 
-### 1. **Criar Planilha**
-- Acesse: https://sheets.google.com
-- Crie nova planilha: "MG Riscos - Solicitações"
-- **Copie o ID da planilha da URL**
+## 🔗 **Parte 3: Conectar ao Frontend**
 
-### 2. **Configurar Google Cloud Console**
-- Acesse: https://console.cloud.google.com
-- Crie novo projeto ou selecione existente
-- Ative Google Sheets API
-- Crie Service Account
-- Baixe arquivo JSON de credenciais
+1.  **Configurar Local**: No seu computador, abra ou crie o arquivo `.env`.
+2.  **Variável de Ambiente**:
+    ```bash
+    VITE_WEBHOOK_URL=COLE_A_URL_DO_APPS_SCRIPT_AQUI
+    ```
+3.  **Build**: Execute `pnpm build`. O Vite injetará essa URL no seu app estático de forma segura para o deploy no IPFS.
 
-### 3. **Compartilhar Planilha**
-- Compartilhe com: `seu_service_account_email@projeto.iam.gserviceaccount.com`
-- Permissão: "Editor"
+## 🧪 **Teste do Sistema**
 
-### 4. **Configurar Variáveis de Ambiente**
-```bash
-# No Netlify Dashboard
-GOOGLE_SPREADSHEET_ID=1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms
-GOOGLE_SERVICE_ACCOUNT_KEY={"type":"service_account",...}
-```
+### 1. **Teste no Apps Script**
+- No editor do Apps Script, selecione a função `testWebhook` e clique em `Executar`.
+- Verifique se uma nova linha apareceu na sua planilha.
 
-## 🔧 **Estrutura da Planilha**
-
-### **Colunas Automáticas:**
-| Coluna | Descrição | Exemplo |
-|--------|-----------|---------|
-| timestamp | Data/Hora | 2025-01-25T10:30:00Z |
-| edital | Número do Edital | 001/2025 |
-| empresa_tomador | Empresa Tomadora | Empresa ABC Ltda |
-| cnpj_tomador | CNPJ Tomador | 12.345.678/0001-90 |
-| endereco_tomador | Endereço Tomador | Rua A, 123 |
-| empresa_assegurado | Empresa Assegurada | Empresa XYZ Ltda |
-| cnpj_assegurado | CNPJ Assegurado | 98.765.432/0001-10 |
-| endereco_assegurado | Endereço Assegurado | Av B, 456 |
-| licitacao_url | URL PDF Licitação | https://... |
-| cartao_cnpj_tomador_url | URL CNPJ Tomador | https://... |
-| cartao_cnpj_assegurado_url | URL CNPJ Assegurado | https://... |
-| status | Status da Solicitação | Nova Solicitação |
-
-## 📱 **Teste do Sistema**
-
-### 1. **Deploy no Netlify**
-```bash
-make deploy
-```
-
-### 2. **Testar Formulário**
-- Preencha o formulário
-- Verifique email em `segurgary@gmail.com`
-- Verifique planilha Google
-
-### 3. **Logs de Debug**
-- Netlify Dashboard > Functions > Logs
-- Verifique erros e sucessos
+### 2. **Teste no App (Local)**
+- Execute `pnpm dev`.
+- Preencha o formulário e clique em enviar.
+- Se aparecer a mensagem de sucesso com o Checkmark animado, os dados já estão no seu Google Drive!
 
 ## 🚨 **Troubleshooting**
 
-### **Email não enviado:**
-- Verifique `EMAIL_USER` e `EMAIL_PASS`
-- Confirme App Password do Gmail
-- Verifique logs do Netlify
+### **Erro de Acesso (CORS):**
+- Certifique-se de que a implantação do Apps Script está configurada para acesso por **"Qualquer pessoa"**.
+- Se você alterou o código, precisa criar uma **Nova Versão** ou atualizar a implantação existente para as mudanças entrarem em vigor.
 
-### **Planilha não atualizada:**
-- Verifique `GOOGLE_SPREADSHEET_ID`
-- Confirme permissões da planilha
-- Verifique Service Account
-
-### **Erro de CORS:**
-- Verifique headers na função
-- Confirme origem das requisições
-
-## 📞 **Suporte**
-
-- **Email**: segurgary@gmail.com
-- **Documentação**: [Netlify Functions](https://docs.netlify.com/functions/overview/)
-- **Google Sheets API**: [Documentação](https://developers.google.com/sheets/api)
+### **Email não chega:**
+- Verifique a pasta de SPAM.
+- O Google MailApp tem limites diários de envio (geralmente 100/dia para contas gratuitas), o que é mais que suficiente para este formulário.
 
 ---
-
-**✅ Sistema configurado e funcionando!**
+**✅ Seu backend soberano está configurado e pronto para o IPFS!**

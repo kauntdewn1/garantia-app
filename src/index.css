@@ -2,66 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: 226 50% 27%;      /* #233069 */
+  --primary-foreground: 210 40% 98%;
+  --secondary: 215 80% 27%;    /* #0e3e7d */
+  --accent: 0 84% 60%;         /* Red accent */
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+}
+
 @layer base {
+  * {
+    @apply border-gray-200;
+  }
   body {
-    @apply bg-gray-50;
+    @apply bg-gray-50 text-slate-900 antialiased selection:bg-primary/20;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors;
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
   }
   
-  .section-padding {
-    @apply py-16 md:py-24;
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/10 border border-white/10;
   }
-  
-  .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+
+  .btn-premium {
+    @apply relative overflow-hidden px-8 py-4 rounded-xl font-bold transition-all duration-300 transform active:scale-95 shadow-lg;
+  }
+
+  .btn-primary-gradient {
+    @apply bg-gradient-to-r from-[#233069] to-[#0e3e7d] text-white hover:shadow-primary/30;
+  }
+
+  .btn-accent-gradient {
+    @apply bg-gradient-to-r from-red-600 to-red-800 text-white hover:shadow-red-500/30 font-extrabold;
+  }
+
+  .card-premium {
+    @apply bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
   }
 }
 
-/* TV and Glitch Effects */
-.bg-scanline {
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255, 255, 255, 0.05) 0.5%,
-    transparent 1%
-  );
+/* Background Grids and Effects */
+.bg-grid {
+  background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0);
+  background-size: 24px 24px;
 }
 
-.shadow-glow {
-  box-shadow: 0 0 10px #ff0000, 0 0 5px #ff0000;
+.bg-dot-white {
+  background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0);
+  background-size: 32px 32px;
 }
 
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-@keyframes flicker {
-  0% { opacity: 0.97; }
-  100% { opacity: 1; }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.animate-glitch {
-  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
 }

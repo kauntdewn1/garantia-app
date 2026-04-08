@@ -1,102 +1,47 @@
-# 🔒 Guia de Segurança - mg-riscos-seguro
+# 🔒 Guia de Segurança - mg-riscos-seguro (IPFS Lite)
 
-## 🚨 ALERTA DE SEGURANÇA CRÍTICO
+## 🏗️ Arquitetura Soberana
+Este projeto foi migrado para uma arquitetura descentralizada (IPFS) com backend via Google App Script (GAS). A dependência do Firebase foi **removida em 100%**.
 
-**Sua chave da API do Firebase foi exposta publicamente!**
+## ✅ Ações de Segurança Necessárias
 
-### Chave Comprometida:
-- **API Key**: `AIzaSyBuh_XDxidMT-up0zyfUKYU1UgYya0DWzE`
-- **Projeto**: garantia-app-f58a1
-- **Localização**: GitHub público
+### 1. Proteção de Webhooks
+O envio de formulários é feito via POST para um Webhook configurado no Google App Script.
+- **VITE_WEBHOOK_URL**: Esta URL deve ser mantida privada. Embora esteja no frontend (Vite), certifique-se de configurar o seu script do Google para aceitar requisições apenas de domínios específicos (CORS) ou implementar tokens de validação se necessário.
 
-## ✅ Ações Imediatas Necessárias
+### 2. Variáveis de Ambiente
 
-### 1. Regenerar Chave da API
-1. Acesse [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
-2. Encontre a chave comprometida
-3. Clique em "Regenerate Key"
-4. **IMPORTANTE**: Configure restrições na nova chave
+Sempre utilize o arquivo `.env` para configurações sensíveis e **nunca** o envie para o repositório.
 
-### 2. Configurar Restrições de Segurança
-- **Restrições de Domínio**: Apenas domínios autorizados
-- **Restrições de API**: Apenas APIs necessárias
-- **Quotas**: Limite de uso diário/mensal
-- **Monitoramento**: Ative alertas de uso
-
-### 3. Limpar Histórico do Git
-```bash
-# Execute o script de limpeza
-./scripts/clean-git-history.sh
-```
-
-### 4. Configurar Variáveis de Ambiente
 ```bash
 # Copie o arquivo de exemplo
 cp env.example .env
 
-# Configure suas credenciais no .env
-# NUNCA commite o arquivo .env!
+# Configure sua URL do Google App Script no .env
 ```
 
-## 🛡️ Boas Práticas de Segurança
+## 🛡️ Boas Práticas
 
-### Credenciais
-- ✅ Use variáveis de ambiente
-- ✅ Nunca commite credenciais
-- ✅ Use arquivos .env (no .gitignore)
-- ❌ Nunca hardcode credenciais
+### Credenciais e Tokens
+- ✅ Utilize variáveis de ambiente para a URL do Webhook.
+- ✅ O arquivo `.env` deve estar listado no `.gitignore`.
+- ❌ Nunca insira URLs de produção diretamente no código-fonte.
 
-### Firebase
-- ✅ Configure regras de segurança do Firestore
-- ✅ Use autenticação quando possível
-- ✅ Monitore uso da API
-- ✅ Configure quotas de uso
+### Hospedagem IPFS
+- ✅ Ao fazer o deploy no IPFS, lembre-se que o conteúdo é estático e público. 
+- ✅ Não inclua arquivos de configuração (`.env`, `.git`, `node_modules`) no seu diretório de build (`dist`).
 
-### Desenvolvimento
-- ✅ Use HTTPS em produção
-- ✅ Valide dados de entrada
-- ✅ Implemente rate limiting
-- ✅ Monitore logs de erro
+## 📋 Checklist de Segurança (Pós-Migração)
+- [ ] Chaves de API do Firebase antigas foram revogadas no console do Google Cloud (Ação Manual Recomendada).
+- [ ] `VITE_WEBHOOK_URL` está configurado corretamente no `.env`.
+- [ ] O Google App Script possui validação básica de dados.
+- [ ] O `.gitignore` está protegendo arquivos sensíveis.
 
-## 📋 Checklist de Segurança
-
-- [ ] Regenerar chave da API
-- [ ] Configurar restrições de domínio
-- [ ] Configurar quotas de uso
-- [ ] Limpar histórico do Git
-- [ ] Configurar variáveis de ambiente
-- [ ] Testar aplicação com novas credenciais
-- [ ] Configurar monitoramento
-- [ ] Documentar procedimentos de segurança
-
-## 🔧 Comandos Úteis
-
+## 🔧 Comandos de Auditoria
 ```bash
-# Configuração de segurança
-make security-setup
-
-# Verificar dependências vulneráveis
+# Verificar vulnerabilidades nas dependências (pnpm)
 make security-check
-
-# Backup de configurações
-make backup-config
-
-# Limpeza de arquivos temporários
-make clean
 ```
-
-## 📞 Contatos de Emergência
-
-- **Google Cloud Support**: https://cloud.google.com/support
-- **Firebase Support**: https://firebase.google.com/support
-- **GitHub Security**: https://github.com/security
-
-## 📚 Recursos Adicionais
-
-- [Google Cloud Security Best Practices](https://cloud.google.com/security/best-practices)
-- [Firebase Security Rules](https://firebase.google.com/docs/rules)
-- [GitHub Security](https://docs.github.com/en/github/managing-security-in-vulnerabilities)
 
 ---
-
-**⚠️ IMPORTANTE**: Este é um incidente de segurança crítico. Aja imediatamente para proteger suas credenciais e dados. 
+*Este documento foi atualizado após a remoção total das dependências do Firebase.*

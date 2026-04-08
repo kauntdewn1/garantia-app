@@ -8,7 +8,7 @@
  * 4. Clique em Implantar > Gerenciar implantações
  * 5. Novo deploy > Tipo: App da web > Quem pode acessar: Qualquer pessoa
  * 6. Copie a URL gerada
- * 7. Configure como GOOGLE_WEBHOOK_URL no Netlify
+ * 7. Configure como VITE_WEBHOOK_URL no seu arquivo .env local
  */
 
 function doPost(e) {
@@ -37,14 +37,17 @@ function doPost(e) {
       data.licitacao_url || '',
       data.cartao_cnpj_tomador_url || '',
       data.cartao_cnpj_assegurado_url || '',
-      data.status || 'Nova Solicitação'
+      data.status || 'Nova Solicitação via IPFS'
     ]);
 
-    console.log('Dados salvos na planilha com sucesso');
+    // Enviar notificação por email
+    sendNotificationEmail(data);
+
+    console.log('Dados salvos e email enviado');
 
     return ContentService.createTextOutput(JSON.stringify({ 
       result: "success", 
-      message: "Dados salvos na planilha" 
+      message: "Processado com sucesso" 
     }))
     .setMimeType(ContentService.MimeType.JSON);
 
@@ -58,6 +61,28 @@ function doPost(e) {
     .setMimeType(ContentService.MimeType.JSON);
   }
 }
+
+/**
+ * Envia notificação por email usando os serviços do Google
+ */
+function sendNotificationEmail(data) {
+  const recipient = "segurgary@gmail.com"; // Altere conforme necessário
+  const subject = "🚨 NOVA COTAÇÃO - Edital: " + data.edital;
+  
+  const body = 
+    "🚨 NOVA SOLICITAÇÃO DE COTAÇÃO\n\n" +
+    "Edital: " + data.edital + "\n" +
+    "Tomador: " + data.empresa_tomador + " (CNPJ: " + data.cnpj_tomador + ")\n" +
+    "Assegurado: " + data.empresa_assegurado + " (CNPJ: " + data.cnpj_assegurado + ")\n\n" +
+    "Arquivos:\n" +
+    "- Licitação: " + (data.licitacao_url || 'N/A') + "\n" +
+    "- CNPJ Tomador: " + (data.cartao_cnpj_tomador_url || 'N/A') + "\n" +
+    "- CNPJ Assegurado: " + (data.cartao_cnpj_assegurado_url || 'N/A') + "\n\n" +
+    "Acesse a planilha para mais detalhes.";
+    
+  MailApp.sendEmail(recipient, subject, body);
+}
+
 
 /**
  * Função para testar o webhook

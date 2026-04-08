@@ -1,45 +1,53 @@
-# Configuração do Ambiente de Desenvolvimento
+# Guia de Desenvolvimento SOBERANO (IPFS Lite)
 
-## Problema Resolvido ✅
-O erro 404 ao acessar `/.netlify/functions/upload` foi resolvido implementando uma solução híbrida.
+Este guia detalha o ambiente de desenvolvimento para o **MG Riscos**, agora totalmente migrado para a stack pnpm + IPFS + Google App Script.
 
-## Solução Implementada
-A função `uploadFile` agora funciona em dois modos:
+## 🚀 Como Iniciar
 
-### Modo Desenvolvimento (DEV)
-- Simula o upload do arquivo
-- Retorna uma URL simulada
-- Não requer servidor Netlify dev
-- Funciona apenas com `npm run dev`
+### 1. Requisitos
+- **Node.js**: v18 ou superior.
+- **pnpm**: Recomendado para o ecossistema Protocolo NΞØ. Instale via `npm install -g pnpm`.
 
-### Modo Produção
-- Usa as funções Netlify reais
-- Funciona automaticamente no Netlify
-
-## Como usar
-
-### Para desenvolvimento:
+### 2. Preparação do Ambiente
 ```bash
-npm run dev
-```
-- Acesse: http://localhost:5173
-- Uploads são simulados (modo DEV)
-- Console mostra logs de simulação
+# Instale as dependências (Makefile usa pnpm internamente)
+make install
 
-### Para testar funções Netlify:
+# Configure seu ambiente
+cp env.example .env
+# Edite o .env e adicione seu VITE_WEBHOOK_URL
+```
+
+### 3. Workflow de Desenvolvimento
 ```bash
-npm run dev:netlify
+# Inicie o servidor local (Vite)
+make dev
+# ou
+pnpm dev
 ```
-- Inicia servidor Netlify dev na porta 8888
-- Funções reais disponíveis em http://localhost:8888
+- Acesse: `http://localhost:5173`
+- O formulário agora envia dados diretamente para o seu Webhook (ou simula sucessos caso não haja uma URL configurada).
 
-## URLs de acesso
-- Frontend: http://localhost:5173
-- Funções Netlify (quando disponível): http://localhost:8888
+## 🧩 Modos de Operação do Webhook
 
-## Vantagens da solução
-- ✅ Funciona imediatamente em desenvolvimento
-- ✅ Não requer configuração complexa
-- ✅ Uploads simulados para testes
-- ✅ Produção usa funções reais
-- ✅ Fácil de debugar
+O sistema de integração do formulário (`src/utils/api.js`) opera de forma inteligente:
+
+1.  **Modo Real (Production/Staging)**: Quando o arquivo `.env` contém uma `VITE_WEBHOOK_URL` válida, os dados são enviados via POST para o Google App Script.
+2.  **Modo Simulação (Fallback)**: Caso a URL não esteja configurada ou o ambiente seja instável, o app simula o envio com um atraso de 1,5s para demonstrar a experiência do usuário (UX).
+
+## 📦 Build e Deploy IPFS
+
+Para gerar a versão final para o IPFS:
+```bash
+make build
+```
+- **Pasta de Saída**: `/dist`
+- **Caminhos**: Estão configurados como `./` (relativos), obrigatórios para carregar assets corretamente em gateways IPFS.
+- **Roteamento**: O sistema utiliza `HashRouter`, permitindo que as rotas funcionem mesmo sem configuração de fallback no servidor/nó.
+
+## 🔒 Segurança em Desenvolvimento
+- O arquivo `.env` **nunca** deve ser commitado.
+- Utilize o `make security-check` para auditar vulnerabilidades.
+
+---
+**✅ Ambiente de desenvolvimento pronto e otimizado!**

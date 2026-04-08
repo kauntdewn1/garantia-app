@@ -1,198 +1,81 @@
-# MG Riscos - Seguro Garantia para Licitações
+# MG Riscos - Seguro Garantia para Licitações (IPFS Lite)
 
-## 🚀 **Versão Netlify - Formulário de Cotação Automatizado**
+## 🌐 **Arquitetura Soberana e Descentralizada**
 
-Sistema moderno para solicitação de cotação de seguro garantia para licitações públicas, construído com React, Vite e deployado no Netlify.
+Esta é a versão moderna e agnóstica do sistema de solicitação de cotação de seguro garantia. O projeto foi refatorado para operar em infraestrutura descentralizada (**IPFS**) e sem dependência de provedores de Nuvem tradicionais como Netlify ou Firebase.
 
-## ✨ **Funcionalidades**
+## ✨ **Funcionalidades Core**
 
-- 📝 **Formulário inteligente** com validação em tempo real
-- 📎 **Upload de arquivos** (PDFs, imagens) via Netlify Functions
-- 🔒 **Validação de CNPJ** automática
-- 📱 **Design responsivo** com Tailwind CSS
-- ⚡ **Performance otimizada** com Vite
-- 🚀 **Deploy automático** no Netlify
+- 📝 **Formulário Premium**: Interface de alta fidelidade com Glassmorphism e animações suaves.
+- 🚀 **IPFS Ready**: Build configurado com caminhos relativos para funcionar em qualquer gateway (Pinata, Fleek, IPFS Local).
+- 🔗 **Roteamento Resiliente**: Utiliza `HashRouter` para garantir navegação perfeita em sistemas de arquivos estáticos.
+- 📬 **Backend Serverless (GAS)**: Integração via Webhook com Google App Script para armazenamento em planilhas e notificações automáticas por e-mail.
+- 🔒 **Privacidade Total**: Sem rastreadores de terceiros ou dependências proprietárias de nuvem.
 
-## 🛠️ **Tecnologias**
+## 🛠️ **Stack Tecnológica**
 
-- **Frontend**: React 18 + Vite
-- **Estilização**: Tailwind CSS
+- **Frontend**: React 18 + Vite 5
+- **Estilização**: Tailwind CSS + Custom HSL Tokens
 - **Animações**: Framer Motion
-- **Formulários**: Netlify Forms
-- **Upload**: Netlify Functions
-- **Deploy**: Netlify
-- **Testes**: Jest
+- **Roteamento**: React Router (Hash Mode)
+- **Backend**: Google App Script (Node-less)
+- **Gerente de Pacotes**: pnpm
 
-## 🚀 **Quick Start**
+## 🚀 **Início Rápido**
 
 ### 1. **Instalação**
-```bash
-# Clone o repositório
-git clone <url-do-repositorio>
-cd mg-riscos-seguro-new
 
-# Instale as dependências
+```bash
+# Instale as dependências usando pnpm
 make install
-# ou
-npm install
 ```
 
-### 2. **Desenvolvimento**
+### 2. **Configuração**
+Crie um arquivo `.env` baseado no `env.example`:
 ```bash
-# Inicie o servidor de desenvolvimento
+cp env.example .env
+# Adicione sua VITE_WEBHOOK_URL do Google App Script
+```
+
+### 3. **Desenvolvimento**
+```bash
 make dev
-# ou
-npm run dev
 ```
 
-### 3. **Build e Deploy**
+### 4. **Build para IPFS**
 ```bash
-# Build para produção
 make build
-
-# Deploy para Netlify
-make deploy
+# Os arquivos estarão prontos na pasta /dist
 ```
 
-## 📋 **Comandos Disponíveis**
+## 📋 **Comandos Principais**
 
 ```bash
 make help          # Lista todos os comandos
-make install       # Instala dependências
-make dev           # Inicia servidor de desenvolvimento
-make build         # Cria build de produção
-make preview       # Preview do build
-make test          # Executa testes
-make clean         # Limpa arquivos temporários
-make deploy        # Deploy para Netlify
+make build         # Gera o build estático para IPFS
+make preview       # Preview local do build
+make security-check # Verifica vulnerabilidades
+make info          # Detalhes da arquitetura atual
 ```
 
-## 🌐 **Configuração Netlify**
-
-### **1. Login no Netlify**
-```bash
-make netlify-login
-```
-
-### **2. Inicializar Projeto**
-```bash
-make netlify-init
-```
-
-### **3. Deploy Automático**
-```bash
-make deploy
-```
-
-## 📁 **Estrutura do Projeto**
+## 📂 **Estrutura do Projeto**
 
 ```
 ├── src/
-│   ├── components/          # Componentes React
-│   │   ├── RequestForm.jsx  # Formulário principal
-│   │   ├── Header.jsx       # Cabeçalho
-│   │   └── ...
-│   ├── utils/
-│   │   └── netlify.js       # Utilitários Netlify
-│   └── App.jsx              # App principal
-├── netlify/
-│   └── functions/           # Netlify Functions
-│       └── upload.js        # Função de upload
-├── public/                  # Arquivos estáticos
-├── netlify.toml            # Configuração Netlify
-└── vite.config.js          # Configuração Vite
+│   ├── components/      # UI Components (Hero, RequestForm)
+│   ├── utils/           # API genérica via Fetch
+│   └── App.jsx          # Entry point com HashRouter
+├── dist/                # Pasta de saída para IPFS
+├── google-app-script.js # Código para o backend no Google Drive
+├── Makefile             # Automação de tarefas com pnpm
+└── vite.config.js      # Configurações de caminhos relativos
 ```
 
-## 🔧 **Configuração de Formulários**
+## 🔒 **Segurança e Privacidade**
 
-O projeto usa **Netlify Forms** para processamento automático:
-
-```html
-<form name="cotacao-seguro" method="POST" netlify>
-  <!-- Campos do formulário -->
-</form>
-```
-
-### **Campos Obrigatórios:**
-- Número do Edital
-- PDF da Licitação
-- Dados do Tomador (Empresa + CNPJ)
-- Dados do Assegurado (Empresa + CNPJ)
-
-### **Campos Opcionais:**
-- Endereços
-- Cartões CNPJ
-
-## 📤 **Upload de Arquivos**
-
-Arquivos são processados via **Netlify Functions**:
-
-- **Tamanho máximo**: 5MB
-- **Formatos aceitos**: PDF, JPG, PNG, GIF
-- **Validação**: Tipo e tamanho
-- **Storage**: Simulado (em produção, use Cloudinary/AWS S3)
-
-## 🧪 **Testes**
-
-```bash
-# Executar testes
-make test
-
-# Testes em modo watch
-make test-watch
-
-# Testes com cobertura
-make test-coverage
-```
-
-## 🚀 **Deploy**
-
-### **Deploy Automático**
-```bash
-make deploy
-```
-
-### **Deploy Manual**
-```bash
-# Build
-make build
-
-# Deploy apenas do build
-make deploy-build
-```
-
-## 🔒 **Segurança**
-
-- ✅ Validação de formulários no cliente e servidor
-- ✅ Validação de tipos de arquivo
-- ✅ Limite de tamanho de arquivo
-- ✅ Validação de CNPJ
-- ✅ Headers de segurança configurados
-
-## 📊 **Monitoramento**
-
-- **Formulários**: Dashboard Netlify
-- **Funções**: Logs Netlify Functions
-- **Performance**: Lighthouse + Core Web Vitals
-
-## 🤝 **Contribuição**
-
-1. Fork o projeto
-2. Crie uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch
-5. Abra um Pull Request
-
-## 📄 **Licença**
-
-Este projeto está sob a licença MIT.
-
-## 📞 **Suporte**
-
-- **Email**: licitacoes@mgriscos.com
-- **Documentação**: [Netlify Docs](https://docs.netlify.com/)
-- **Issues**: GitHub Issues
+- ✅ **Soberania de Dados**: As submissões vão direto para o seu Google Drive.
+- ✅ **Zero Lock-in**: O frontend pode ser hospedado em qualquer lugar (IPFS, Arweave, VPS).
+- ✅ **Auditoria**: Verificações de segurança integradas via `pnpm audit`.
 
 ---
-
-**Desenvolvido com ❤️ para MG Riscos**
+**Desenvolvido com ❤️ para MG Riscos - Versão Soberana**

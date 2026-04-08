@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
-import { submitForm, uploadFile, validateCNPJ, formatCNPJ } from '../utils/netlify';
+import { submitForm, uploadFile, validateCNPJ, formatCNPJ } from '../utils/api';
 
 function RequestForm() {
   const [formData, setFormData] = useState({
@@ -86,111 +86,78 @@ function RequestForm() {
     toast.loading('Enviando solicitação...');
 
     try {
-      // Preparar dados para o webhook
-      const webhookData = {
-        edital: formData.edital,
-        empresa_tomador: formData.empresa_tomador,
-        cnpj_tomador: formData.cnpj_tomador,
-        endereco_tomador: formData.endereco_tomador,
-        empresa_assegurado: formData.empresa_assegurado,
-        cnpj_assegurado: formData.cnpj_assegurado,
-        endereco_assegurado: formData.endereco_assegurado,
-        submitted_at: new Date().toISOString()
-      };
-
-      // Upload dos arquivos primeiro
+      // Upload dos arquivos primeiro (referências no modo IPFS Lite)
       const uploadPromises = [];
-      const fileUrls = {};
+      const fileRefs = {};
 
       if (files.licitacao) {
         uploadPromises.push(
-          uploadFile(files.licitacao).then(url => {
-            fileUrls.licitacao = url;
+          uploadFile(files.licitacao).then(ref => {
+            fileRefs.licitacao = ref;
           })
         );
       }
 
       if (files.cartao_cnpj_tomador) {
         uploadPromises.push(
-          uploadFile(files.cartao_cnpj_tomador).then(url => {
-            fileUrls.cartao_cnpj_tomador = url;
+          uploadFile(files.cartao_cnpj_tomador).then(ref => {
+            fileRefs.cartao_cnpj_tomador = ref;
           })
         );
       }
 
       if (files.cartao_cnpj_assegurado) {
         uploadPromises.push(
-          uploadFile(files.cartao_cnpj_assegurado).then(url => {
-            fileUrls.cartao_cnpj_assegurado = url;
+          uploadFile(files.cartao_cnpj_assegurado).then(ref => {
+            fileRefs.cartao_cnpj_assegurado = ref;
           })
         );
       }
 
-      // Aguardar uploads
       await Promise.all(uploadPromises);
 
-      // Adicionar URLs dos arquivos aos dados
-      Object.assign(webhookData, fileUrls);
+      // Preparar dados finais
+      const payload = {
+        ...formData,
+        ...fileRefs,
+        submitted_at: new Date().toISOString()
+      };
 
-      // Enviar para o webhook do Netlify
-      const response = await fetch('/.netlify/functions/process-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(webhookData),
-      });
+      // Enviar via API genérica
+      const result = await submitForm(payload);
 
-      if (response.ok) {
-        const result = await response.json();
+      if (result.success) {
+        toast.dismiss();
+        toast.success('Solicitação enviada com sucesso!');
         
-        if (result.success) {
-          toast.dismiss();
-          toast.success('Solicitação enviada com sucesso! Entraremos em contato em breve.');
-          
-          // Limpar formulário
-          setFormData({
-            edital: '',
-            empresa_tomador: '',
-            cnpj_tomador: '',
-            endereco_tomador: '',
-            empresa_assegurado: '',
-            cnpj_assegurado: '',
-            endereco_assegurado: '',
-          });
-          setFiles({
-            licitacao: null,
-            cartao_cnpj_tomador: null,
-            cartao_cnpj_assegurado: null,
-          });
-        } else {
-          throw new Error(result.message || 'Erro no processamento');
-        }
+        // Limpar formulário
+        setFormData({
+          edital: '',
+          empresa_tomador: '',
+          cnpj_tomador: '',
+          endereco_tomador: '',
+          empresa_assegurado: '',
+          cnpj_assegurado: '',
+          endereco_assegurado: '',
+        });
+        setFiles({
+          licitacao: null,
+          cartao_cnpj_tomador: null,
+          cartao_cnpj_assegurado: null,
+        });
       } else {
-        // Tratamento de erro mais específico
-        let errorMessage = 'Erro ao enviar solicitação';
-        
-        if (response.status === 400) {
-          errorMessage = 'Dados inválidos. Verifique as informações.';
-        } else if (response.status === 500) {
-          errorMessage = 'Erro interno do servidor. Tente novamente.';
-        } else if (response.status === 502) {
-          errorMessage = 'Serviço temporariamente indisponível. Tente novamente.';
-        } else {
-          errorMessage = `Erro ${response.status}: ${response.statusText}`;
-        }
-        
-        throw new Error(errorMessage);
+        throw new Error(result.message);
       }
 
     } catch (error) {
       console.error('Erro no envio:', error);
       toast.dismiss();
-      toast.error(error.message || 'Erro ao enviar solicitação. Tente novamente.');
+      toast.error(error.message || 'Erro ao enviar. Tente novamente.');
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   const inputClasses = "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-gray-150";
 
